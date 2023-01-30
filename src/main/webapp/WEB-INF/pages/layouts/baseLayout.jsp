@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
+<%@ include file="/WEB-INF/pages/tiles/locale.jsp" %>
+
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
    "http://www.w3.org/TR/html4/loose.dtd">
@@ -27,7 +31,7 @@
 
 				<c:if test="${not (sessionScope.user eq 'active')}">
 					<div class="menu-wrapper">
-						<p>Welcome!!!!!</p>
+						<p><c:out value="${message}" /></p>
 					</div>
 					<%-- <c:import url=""></c:import> --%>
 				</c:if>

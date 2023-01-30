@@ -1,9 +1,7 @@
 package by.it.selvanovich.news.controller.impl;
 
-import by.it.selvanovich.news.bean.News;
 import by.it.selvanovich.news.controller.Command;
 import by.it.selvanovich.news.service.INewsService;
-import by.it.selvanovich.news.service.IUserService;
 import by.it.selvanovich.news.service.ServiceException;
 import by.it.selvanovich.news.service.ServiceProvider;
 import jakarta.servlet.ServletException;

@@ -7,11 +7,11 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-public class GoToRegistrationPageCommand implements Command {
+public class DoLocalization implements Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("WEB-INF/jsp/registration.jsp").forward(request, response);
+        request.getSession(true).setAttribute("local", request.getParameter("local"));
+        response.sendRedirect("controller?command=go_to_news_list");
     }
-
 }
