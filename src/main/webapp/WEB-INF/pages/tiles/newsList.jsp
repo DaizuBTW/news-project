@@ -5,7 +5,7 @@
 
 
 <div class="body-title">
-	<a href="controller?command=go_to_news_list"><c:out value="${button_back_to_news}" /> >> </a> <c:out value="${menu_news_list}" />
+	<c:out value="${menu_news_list}" />
 </div>
 
 <form action="controller" method="post">

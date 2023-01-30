@@ -14,29 +14,34 @@
             <tr>
                 <td class="space_around_title_text"><c:out value="${news_title}" /></td>
                 <td class="space_around_view_text"><div class="word-breaker">
-                    <c:out value="${requestScope.news.title }" /><br />
-                    <input type="text" name="title" value="" />
+                    <textarea name="title" cols="40" rows="2" required
+                              placeholder="<c:out value="${requestScope.news.title }" />"
+                              value="<c:out value="${requestScope.news.title }" />"
+                    ></textarea>
                 </div></td>
             </tr>
             <tr>
                 <td class="space_around_title_text"><c:out value="${news_date}" /></td>
                 <td class="space_around_view_text"><div class="word-breaker">
-                    <c:out value="${requestScope.news.newsDate }" /><br />
-                    <input type="text" name="date" value="" />
+                    <textarea name="date" cols="40" rows="1" required
+                              placeholder="<c:out value="${requestScope.news.newsDate }" />"
+                    ></textarea>
                 </div></td>
             </tr>
             <tr>
                 <td class="space_around_title_text"><c:out value="${news_brief}" /></td>
                 <td class="space_around_view_text"><div class="word-breaker">
-                    <c:out value="${requestScope.news.briefNews }" /><br />
-                    <input type="text" name="brief" value="" />
+                    <textarea name="brief" cols="40" rows="2" required
+                              placeholder="<c:out value="${requestScope.news.briefNews }" />"
+                    ></textarea>
                 </div></td>
             </tr>
             <tr>
                 <td class="space_around_title_text"><c:out value="${news_content}" /></td>
                 <td class="space_around_view_text"><div class="word-breaker">
-                    <c:out value="${requestScope.news.content }" /><br />
-                    <input type="text" name="content" value="" />
+                    <textarea name="content" cols="40" rows="3" required
+                              placeholder="<c:out value="${requestScope.news.content }" />"
+                    ></textarea>
                 </div></td>
             </tr>
         </table>

@@ -14,8 +14,13 @@ html,body {
 	background-color: var(--color-light);
 	height: 100%;
 	width: 1000px;
-	
+}
 
+textarea {
+	max-width: 480px;
+	min-height: 22px;
+	min-width: 300px;
+	max-height: 300px;
 }
 
 * {
@@ -121,10 +126,8 @@ html,body {
 
 .list-menu-wrapper {
 	line-height: 1.5;
-	width: 80%;
 	padding-top: 10px;
 	padding-bottom: 20px;
-	padding-left: 10px;
 }
 
 .list-menu-invisible-wrapper {
@@ -217,6 +220,10 @@ html,body {
     margin-right: 10px;
 }
 
+.locals {
+	height: 20px;
+}
+
 .body-title {
 	margin-top: 10px;
     margin-right: 5px;
@@ -290,6 +297,15 @@ a {
 
 a:hover {
 	text-decoration: underline;
+}
+
+form.reg {
+	position: absolute;
+	transform: translate(0%, -100%);
+}
+
+.signin-btn {
+	margin-top: 5px;
 }
 
 input[type="submit" i] {
