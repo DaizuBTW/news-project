@@ -186,7 +186,6 @@ html,body {
 	padding-top: 20px;
 	padding-right: 5px;
 	padding-left: 20px;
-	word-break: break-all;
 }
 
 .news-date {
@@ -198,7 +197,6 @@ html,body {
 }
 
 .news-content {
-	word-break: break-all;
 	text-align: left;
 	padding-bottom: 5px;
 	padding-top: 5px;
@@ -228,7 +226,7 @@ html,body {
     box-shadow: 0 0.1rem 0.5rem var(--color-light);
 }
 
-.delete-button-position {
+.body-button-position {
 	text-align: right;
 	padding-top: 40px;
 	padding-bottom: 20px;
@@ -253,7 +251,7 @@ html,body {
 }
 
 .word-breaker {
-	word-break: break-all;
+	word-break: normal;
 }
 
 .space_around_view_text {

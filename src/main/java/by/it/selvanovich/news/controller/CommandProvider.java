@@ -17,6 +17,7 @@ public class CommandProvider {
         commands.put(CommandName.DO_ADD_NEWS, new DoAddNews());
         commands.put(CommandName.DO_UPDATE_NEWS, new DoUpdateNews());
         commands.put(CommandName.DO_DELETE_NEWS, new DoDeleteNews());
+        commands.put(CommandName.DO_LOCALIZATION, new DoLocalization());
         commands.put(CommandName.GO_TO_NEWS_LIST, new GoToNewsList());
         commands.put(CommandName.GO_TO_VIEW_NEWS, (Command) new GoToViewNews());
         commands.put(CommandName.GO_TO_ADD_NEWS, new GoToAddNews());
