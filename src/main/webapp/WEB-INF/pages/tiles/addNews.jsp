@@ -3,6 +3,7 @@
 
 <%@ include file="/WEB-INF/pages/tiles/locale.jsp" %>
 
+
 <div class="body-title">
     <a href="controller?command=go_to_news_list"><c:out value="${button_back_to_news}" /> >> </a> <c:out value="${label_add}" />
 </div>
