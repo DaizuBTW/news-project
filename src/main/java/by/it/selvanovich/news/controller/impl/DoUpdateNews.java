@@ -22,6 +22,7 @@ public class DoUpdateNews implements Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // TODO добавить валидаторы
 
         String id;
         String title;

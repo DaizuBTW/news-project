@@ -13,9 +13,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript" src="script/validation.js"></script>
-<title>locale.linkname.headertitle <!-- <bean:message key="locale.linkname.headertitle" />
- -->
-</title>
+<link rel="shortcut icon" href="../../../images/en.png" type="image/png">
+<title><c:out value="${page_title}" /></title>
 
 <link rel="stylesheet" type="text/css" href="styles/newsStyle.css">
 

@@ -17,6 +17,8 @@ public class GoToUpdateNews implements Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // TODO добавить валидаторы
+
         News news;
         String id;
 

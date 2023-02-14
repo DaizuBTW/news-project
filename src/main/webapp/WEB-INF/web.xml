@@ -18,4 +18,9 @@
 		<servlet-name>Controller</servlet-name>
 		<url-pattern>/controller</url-pattern>
 	</servlet-mapping>
+	<listener>
+		<listener-class>
+			by.it.selvanovich.news.controller.ServletContextListener
+		</listener-class>
+	</listener>
 </web-app>

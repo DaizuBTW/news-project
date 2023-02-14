@@ -19,6 +19,8 @@ public class DoSIgnIn implements Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // TODO добавить валидаторы
+
         String username;
         String password;
 

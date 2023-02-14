@@ -6,6 +6,7 @@ import by.it.selvanovich.news.dao.DAOException;
 import by.it.selvanovich.news.dao.IUserDAO;
 
 public class UserDAO implements IUserDAO {
+    // TODO добавить БД
     private final UserList userList = new UserList();
 
     @Override

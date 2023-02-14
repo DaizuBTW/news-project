@@ -10,18 +10,16 @@ import by.it.selvanovich.news.service.INewsService;
 import by.it.selvanovich.news.service.ServiceException;
 
 public class NewsServiceImpl implements INewsService {
-
+    // TODO переработать сервисы для работы с БД
     private final INewsDAO newsDAO = DAOProvider.getInstance().getNewsDAO();
 
     @Override
     public void save() {
-        // TODO Auto-generated method stub
 
     }
 
     @Override
     public void find() {
-        // TODO Auto-generated method stub
 
     }
 
@@ -65,13 +63,7 @@ public class NewsServiceImpl implements INewsService {
     @Override
     public void addNews(String title, String brief, String content, String date) throws ServiceException {
         try {
-            int lastId;
-            if (newsDAO.getListSize() == 0) {
-                lastId = 0;
-            } else {
-                lastId = newsDAO.getNews(newsDAO.getListSize()).getIdNews() + 1;
-            }
-            newsDAO.addNews(new News(lastId, title, brief, content, date));
+            newsDAO.addNews(new News(1, title, brief, content, date));
         } catch (NewsDAOException e) {
             throw new ServiceException(e);
         }

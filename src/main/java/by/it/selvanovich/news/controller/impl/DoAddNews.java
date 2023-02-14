@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class DoAddNews implements Command {
+    // TODO добавить валидаторы
 
     private final INewsService service = ServiceProvider.getInstance().getNewsService();
 
