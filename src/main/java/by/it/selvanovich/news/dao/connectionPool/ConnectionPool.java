@@ -8,8 +8,13 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executor;
 
+
+
+// TODO разобраться до конца с пулом
+
+
+
 public final class ConnectionPool {
-    // TODO разобраться до конца с пулом
     private final static ConnectionPool connectionPool = new ConnectionPool();
     private BlockingQueue<Connection> connectionQueue;
     private BlockingQueue<Connection> givenAwayConQueue;
