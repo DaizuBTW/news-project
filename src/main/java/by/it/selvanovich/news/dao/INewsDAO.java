@@ -17,6 +17,4 @@ public interface INewsDAO {
 
     void deleteNewses(String[] idNewses) throws NewsDAOException;
 
-    int getListSize() throws NewsDAOException;
-
 }

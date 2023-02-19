@@ -1,7 +1,7 @@
 package by.it.selvanovich.news.controller;
 
-import by.it.selvanovich.news.dao.ConnectionPoolException;
-import by.it.selvanovich.news.dao.impl.ConnectionPool;
+import by.it.selvanovich.news.dao.connectionPool.ConnectionPoolException;
+import by.it.selvanovich.news.dao.connectionPool.ConnectionPool;
 import jakarta.servlet.ServletContextEvent;
 
 public class ServletContextListener implements jakarta.servlet.ServletContextListener {

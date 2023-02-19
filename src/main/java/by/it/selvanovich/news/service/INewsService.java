@@ -21,7 +21,5 @@ public interface INewsService {
 
     void addNews(String title, String brief, String content, String date) throws ServiceException;
 
-    int getListSize() throws ServiceException;
-
     void delete(String[] idNewses) throws ServiceException;
 }

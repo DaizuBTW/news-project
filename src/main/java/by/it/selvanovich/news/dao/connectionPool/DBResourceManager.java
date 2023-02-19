@@ -1,4 +1,4 @@
-package by.it.selvanovich.news.dao;
+package by.it.selvanovich.news.dao.connectionPool;
 
 import java.util.ResourceBundle;
 

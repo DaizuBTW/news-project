@@ -1,8 +1,4 @@
-package by.it.selvanovich.news.dao.impl;
-
-import by.it.selvanovich.news.dao.ConnectionPoolException;
-import by.it.selvanovich.news.dao.DBParameter;
-import by.it.selvanovich.news.dao.DBResourceManager;
+package by.it.selvanovich.news.dao.connectionPool;
 
 import java.sql.*;
 import java.util.Locale;

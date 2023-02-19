@@ -1,4 +1,4 @@
-package by.it.selvanovich.news.dao;
+package by.it.selvanovich.news.dao.connectionPool;
 
 public class ConnectionPoolException extends Exception {
     private static final long serialVersionUID = 1L;

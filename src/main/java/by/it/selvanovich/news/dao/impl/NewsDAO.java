@@ -1,24 +1,22 @@
 package by.it.selvanovich.news.dao.impl;
 
 import by.it.selvanovich.news.bean.News;
-import by.it.selvanovich.news.bean.NewsList;
 import by.it.selvanovich.news.dao.INewsDAO;
 import by.it.selvanovich.news.dao.NewsDAOException;
+import by.it.selvanovich.news.dao.connectionPool.ConnectionPool;
+import by.it.selvanovich.news.dao.connectionPool.ConnectionPoolException;
 
 import java.sql.*;
 import java.util.*;
 
 public class NewsDAO implements INewsDAO {
-    // TODO дописать оставшиеся методы
+    // TODO закончить внедрение БД (разобраться с датами в БД)
 
     private static final String SQL_SHOW_LIST = "SELECT * FROM news";
     private static final String SQL_SHOW_BY_ID = "SELECT * FROM news WHERE id = ?";
     private static final String SQL_ADD_NEWS = "INSERT INTO news(content,title,brief,users_id) VALUES(?,?,?,?)";
     private static final String SQL_UPDATE_NEWS = "UPDATE news SET content=?,title=?,brief=?,users_id=? WHERE id = ?";
     private static final String SQL_DELETE_NEWS = "DELETE FROM news WHERE id = ?";
-
-
-    private final NewsList newsList = new NewsList();
 
     @Override
     public List<News> getList() throws NewsDAOException {
@@ -30,23 +28,18 @@ public class NewsDAO implements INewsDAO {
                 listResult.add(new News(rs.getInt(1), rs.getString(3), rs.getString(4), rs.getString(2), rs.getString(5)));
             }
             return listResult;
-        } catch (Exception e) {
-            throw new NewsDAOException(e);
+        } catch (SQLException e) {
+            throw new NewsDAOException("sql error", e);
+        } catch (ConnectionPoolException e) {
+            throw new NewsDAOException("error trying to take connection", e);
         }
     }
-
     @Override
     public List<News> getLatestList(int count) throws NewsDAOException {
+        // ЗАГЛУШКА
         List<News> result = new ArrayList<>();
 
         try {
-            if (newsList.size() < count) {
-                result = newsList.getList();
-            } else {
-                for (int i = 0; i < count; i++) {
-                    result.add(newsList.get(newsList.size() - count + i));
-                }
-            }
             return result;
         } catch (Exception e) {
             throw new NewsDAOException(e);
@@ -62,8 +55,10 @@ public class NewsDAO implements INewsDAO {
             ResultSet rs = ps.executeQuery();
             rs.next();
             return new News(rs.getInt(1), rs.getString(3), rs.getString(4), rs.getString(2), rs.getString(5));
-        } catch (Exception e) {
-            throw new NewsDAOException(e);
+        } catch (SQLException e) {
+            throw new NewsDAOException("sql error", e);
+        } catch (ConnectionPoolException e) {
+            throw new NewsDAOException("error trying to take connection", e);
         }
     }
 
@@ -78,10 +73,11 @@ public class NewsDAO implements INewsDAO {
             ps.setInt(4, 1);
 
             ps.executeUpdate();
-            newsList.add(news);
             return news.getIdNews();
-        } catch (Exception e) {
-            throw new NewsDAOException(e);
+        } catch (SQLException e) {
+            throw new NewsDAOException("sql error", e);
+        } catch (ConnectionPoolException e) {
+            throw new NewsDAOException("error trying to take connection", e);
         }
     }
 
@@ -96,9 +92,10 @@ public class NewsDAO implements INewsDAO {
             ps.setInt(5, id);
 
             ps.executeUpdate();
-            newsList.updateNews(id, news);
-        } catch (Exception e) {
-            throw new NewsDAOException(e);
+        } catch (SQLException e) {
+            throw new NewsDAOException("sql error", e);
+        } catch (ConnectionPoolException e) {
+            throw new NewsDAOException("error trying to take connection", e);
         }
     }
 
@@ -113,17 +110,10 @@ public class NewsDAO implements INewsDAO {
                     ps.executeUpdate();
                 }
             }
-        } catch (Exception e) {
-            throw new NewsDAOException(e);
-        }
-    }
-
-    @Override
-    public int getListSize() throws NewsDAOException {
-        try {
-            return newsList.size();
-        } catch (Exception e) {
-            throw new NewsDAOException(e);
+        } catch (SQLException e) {
+            throw new NewsDAOException("sql error", e);
+        } catch (ConnectionPoolException e) {
+            throw new NewsDAOException("error trying to take connection", e);
         }
     }
 }

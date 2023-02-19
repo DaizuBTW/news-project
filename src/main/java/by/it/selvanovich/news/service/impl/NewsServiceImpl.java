@@ -70,15 +70,6 @@ public class NewsServiceImpl implements INewsService {
     }
 
     @Override
-    public int getListSize() throws ServiceException {
-        try {
-            return newsDAO.getListSize();
-        } catch (NewsDAOException e) {
-            throw new ServiceException(e);
-        }
-    }
-
-    @Override
     public void delete(String[] idNewses) throws ServiceException {
         try {
             newsDAO.deleteNewses(idNewses);
