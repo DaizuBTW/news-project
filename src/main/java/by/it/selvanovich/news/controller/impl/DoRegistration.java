@@ -37,7 +37,7 @@ public class DoRegistration implements Command {
             response.sendRedirect("controller?command=go_to_base_page");
         } catch (ServiceException e) {
             e.printStackTrace();
-            request.getRequestDispatcher("WEB-INF/pages/layouts/error.jsp").forward(request, response);
+            response.sendRedirect("WEB-INF/pages/layouts/error.jsp");
         }
 
     }

@@ -41,7 +41,7 @@ public class DoUpdateNews implements Command {
             response.sendRedirect("controller?command=go_to_news_list");
         } catch (ServiceException e) {
             e.printStackTrace();
-            request.getRequestDispatcher("WEB-INF/pages/layouts/error.jsp").forward(request, response);
+            response.sendRedirect("WEB-INF/pages/layouts/error.jsp");
         }
 
     }

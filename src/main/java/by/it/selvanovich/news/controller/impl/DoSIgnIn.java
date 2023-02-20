@@ -43,7 +43,7 @@ public class DoSIgnIn implements Command {
 
         } catch (ServiceException e) {
             e.printStackTrace();
-            request.getRequestDispatcher("WEB-INF/pages/layouts/error.jsp").forward(request, response);
+            response.sendRedirect("WEB-INF/pages/layouts/error.jsp");
         }
     }
 
