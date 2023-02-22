@@ -10,7 +10,8 @@ import by.it.selvanovich.news.service.INewsService;
 import by.it.selvanovich.news.service.ServiceException;
 
 public class NewsServiceImpl implements INewsService {
-    // TODO переработать сервисы для работы с БД
+    // TODO пересмотреть сервисы
+
     private final INewsDAO newsDAO = DAOProvider.getInstance().getNewsDAO();
 
     @Override
