@@ -13,7 +13,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UserDAO implements IUserDAO {
-    // TODO закончить внедрение БД
 
     private static final String SQL_AUTHORIZATION_WITH_USERNAME = "SELECT * FROM users WHERE login = ?";
     private static final String SQL_GET_ROLE = "SELECT * FROM users JOIN roles ON users.roles_id = roles.id WHERE users.login = ?";
@@ -44,7 +43,6 @@ public class UserDAO implements IUserDAO {
 
     @Override
     public boolean registration(User user) throws DAOException {
-        //TODO добавить регистрацию с БД
         String password = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
         try (Connection connection = ConnectionPool.getInstance().takeConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_REGISTRATION);
