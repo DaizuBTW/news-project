@@ -5,6 +5,7 @@ import by.it.selvanovich.news.dao.DAOException;
 import by.it.selvanovich.news.dao.IUserDAO;
 import by.it.selvanovich.news.dao.connectionPool.ConnectionPool;
 import by.it.selvanovich.news.dao.connectionPool.ConnectionPoolException;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,40 +17,45 @@ public class UserDAO implements IUserDAO {
 
     private static final String SQL_AUTHORIZATION_WITH_USERNAME = "SELECT * FROM users WHERE login = ?";
     private static final String SQL_GET_ROLE = "SELECT * FROM users JOIN roles ON users.roles_id = roles.id WHERE users.login = ?";
+    private static final String SQL_REGISTRATION = "INSERT INTO users(login, password, roles_id) VALUES (?, ?, 3)";
 
     @Override
     public boolean authorization(String username, String password) throws DAOException {
-        boolean result = false;
+        String hashed = null;
+
         try (Connection connection = ConnectionPool.getInstance().takeConnection()) {
 
-            PreparedStatement ps = connection.prepareStatement(SQL_AUTHORIZATION_WITH_USERNAME);
-            ps.setString(1, username);
-            ResultSet rs = ps.executeQuery();
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL_AUTHORIZATION_WITH_USERNAME);
+            preparedStatement.setString(1, username);
+            ResultSet resultSet = preparedStatement.executeQuery();
 
-            // заглушка до добавления BCrypt
-            if (rs.next()) {
-                if (rs.getString("password").equals(password)) {
-                    result = true;
-                } else {
-                    result = false;
-                }
+            if (resultSet.next()) {
+                hashed = resultSet.getString("password");
+
+                return BCrypt.checkpw(password, hashed);
             }
-            return result;
         } catch (SQLException e) {
             throw new DAOException("sql error", e);
         } catch (ConnectionPoolException e) {
             throw new DAOException("error trying to take connection", e);
         }
-
+        return false;
     }
 
     @Override
-    public boolean registration(String username, String password, String name, String surname, String role) throws DAOException {
+    public boolean registration(User user) throws DAOException {
         //TODO добавить регистрацию с БД
-        try {
+        String password = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
+        try (Connection connection = ConnectionPool.getInstance().takeConnection()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL_REGISTRATION);
+            preparedStatement.setString(1, user.getUsername());
+            preparedStatement.setString(2, password);
+            preparedStatement.executeUpdate();
             return true;
-        } catch (Exception e) {
-            throw new DAOException(e);
+        } catch (SQLException e) {
+            throw new DAOException("sql error", e);
+        } catch (ConnectionPoolException e) {
+            throw new DAOException("error trying to take connection", e);
         }
     }
 
@@ -59,9 +65,9 @@ public class UserDAO implements IUserDAO {
         String role = "guest";
         try (Connection connection = ConnectionPool.getInstance().takeConnection()) {
 
-            PreparedStatement ps = connection.prepareStatement(SQL_GET_ROLE);
-            ps.setString(1, username);
-            ResultSet rs = ps.executeQuery();
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_ROLE);
+            preparedStatement.setString(1, username);
+            ResultSet rs = preparedStatement.executeQuery();
             if (rs.next()) {
                 role = rs.getString("title");
             }

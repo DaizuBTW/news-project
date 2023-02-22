@@ -16,3 +16,7 @@
 <c:if test="${requestScope.presentation eq 'updateNews' }">
 	<c:import url="/WEB-INF/pages/tiles/updateNews.jsp" />
 </c:if>
+
+<c:if test="${requestScope.presentation eq 'error' }">
+	<c:import url="/WEB-INF/pages/tiles/error.jsp" />
+</c:if>

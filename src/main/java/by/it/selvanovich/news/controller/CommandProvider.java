@@ -11,6 +11,7 @@ public class CommandProvider {
     public CommandProvider() {
         commands.put(CommandName.GO_TO_BASE_PAGE, new GoToBasePage());
         commands.put(CommandName.GO_TO_REGISTRATION_PAGE, new GoToRegistrationPageCommand());
+        commands.put(CommandName.GO_TO_ERROR_PAGE, new GoToErrorPage());
         commands.put(CommandName.DO_REGISTRATION, new DoRegistration());
         commands.put(CommandName.DO_SIGN_IN, new DoSIgnIn());
         commands.put(CommandName.DO_SIGN_OUT, new DoSignOut());

@@ -5,6 +5,8 @@
 	<fmt:message bundle="${loc}" key="local.message" var="message" />
 	<fmt:message bundle="${loc}" key="local.pagetitle" var="page_title" />
 
+	<fmt:message bundle="${loc}" key="local.error.name.global_error" var="error" />
+
 	<fmt:message bundle="${loc}" key="local.header.login" var="header_login" />
 	<fmt:message bundle="${loc}" key="local.header.password" var="header_password" />
 	<fmt:message bundle="${loc}" key="local.header.registration" var="header_registration" />

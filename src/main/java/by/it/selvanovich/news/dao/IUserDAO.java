@@ -6,7 +6,7 @@ public interface IUserDAO {
 
     boolean authorization(String username, String password) throws DAOException;
 
-    boolean registration(String username, String password, String name, String surname, String role) throws DAOException;
+    boolean registration(User user) throws DAOException;
 
     String getRole(String username) throws DAOException;
 }

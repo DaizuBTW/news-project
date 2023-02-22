@@ -38,7 +38,7 @@ public class DoAddNews implements Command {
             response.sendRedirect("controller?command=go_to_news_list");
         } catch (ServiceException e) {
             e.printStackTrace();
-            response.sendRedirect("WEB-INF/pages/layouts/error.jsp");
+            response.sendRedirect("controller?command=go_to_error_page");
         }
 
     }

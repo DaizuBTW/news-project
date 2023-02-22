@@ -40,6 +40,7 @@ public class NewsDAO implements INewsDAO {
         List<News> result = new ArrayList<>();
 
         try {
+
             return result;
         } catch (Exception e) {
             throw new NewsDAOException(e);
@@ -65,14 +66,14 @@ public class NewsDAO implements INewsDAO {
     @Override
     public int addNews(News news) throws NewsDAOException {
         try (Connection connection = ConnectionPool.getInstance().takeConnection()) {
-            PreparedStatement ps = connection.prepareStatement(SQL_ADD_NEWS);
-            ps.setString(1, news.getContent());
-            ps.setString(2, news.getTitle());
-            ps.setString(3, news.getBriefNews());
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL_ADD_NEWS);
+            preparedStatement.setString(1, news.getContent());
+            preparedStatement.setString(2, news.getTitle());
+            preparedStatement.setString(3, news.getBriefNews());
             //ps.setDate(4, Date.valueOf(news.getNewsDate()));
-            ps.setInt(4, 1);
+            preparedStatement.setInt(4, 1);
 
-            ps.executeUpdate();
+            preparedStatement.executeUpdate();
             return news.getIdNews();
         } catch (SQLException e) {
             throw new NewsDAOException("sql error", e);

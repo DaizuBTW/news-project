@@ -1,5 +1,6 @@
 package by.it.selvanovich.news.controller.impl;
 
+import by.it.selvanovich.news.bean.User;
 import by.it.selvanovich.news.controller.Command;
 import by.it.selvanovich.news.service.IUserService;
 import by.it.selvanovich.news.service.ServiceException;
@@ -33,11 +34,11 @@ public class DoRegistration implements Command {
         surname = request.getParameter(JSP_SURNAME_PARAM);
 
         try {
-            service.registration(username, password, name, surname);
+            service.registration(new User(username, password, name, surname, "user"));
             response.sendRedirect("controller?command=go_to_base_page");
         } catch (ServiceException e) {
             e.printStackTrace();
-            response.sendRedirect("WEB-INF/pages/layouts/error.jsp");
+            response.sendRedirect("controller?command=go_to_error_page");
         }
 
     }

@@ -27,13 +27,12 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public boolean registration(String username, String password, String name, String surname) throws ServiceException {
+    public boolean registration(User user) throws ServiceException {
         try {
-            userDAO.registration(username, password, name, surname, "user");
+            userDAO.registration(user);
             return true;
         }catch(DAOException e) {
             throw new ServiceException(e);
         }
-
     }
 }
