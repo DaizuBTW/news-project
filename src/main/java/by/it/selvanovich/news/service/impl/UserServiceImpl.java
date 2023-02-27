@@ -8,7 +8,6 @@ import by.it.selvanovich.news.service.IUserService;
 import by.it.selvanovich.news.service.ServiceException;
 
 public class UserServiceImpl implements IUserService {
-    // TODO пересмотреть сервисы
 
     private final IUserDAO userDAO = DAOProvider.getInstance().getUserDao();
 

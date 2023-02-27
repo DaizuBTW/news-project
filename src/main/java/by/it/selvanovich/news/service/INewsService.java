@@ -7,10 +7,6 @@ import by.it.selvanovich.news.dao.NewsDAOException;
 
 public interface INewsService {
 
-    void save();
-
-    void find();
-
     void update(int id, String title, String brief, String content, String date) throws ServiceException;
 
     List<News> latestList(int count) throws ServiceException;

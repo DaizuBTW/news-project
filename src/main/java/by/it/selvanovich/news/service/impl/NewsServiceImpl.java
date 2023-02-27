@@ -10,19 +10,8 @@ import by.it.selvanovich.news.service.INewsService;
 import by.it.selvanovich.news.service.ServiceException;
 
 public class NewsServiceImpl implements INewsService {
-    // TODO пересмотреть сервисы
 
     private final INewsDAO newsDAO = DAOProvider.getInstance().getNewsDAO();
-
-    @Override
-    public void save() {
-
-    }
-
-    @Override
-    public void find() {
-
-    }
 
     @Override
     public void update(int id, String title, String brief, String content, String date) throws ServiceException {
