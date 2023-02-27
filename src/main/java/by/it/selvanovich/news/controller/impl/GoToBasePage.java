@@ -27,7 +27,7 @@ public class GoToBasePage implements Command {
             request.getRequestDispatcher("WEB-INF/pages/layouts/baseLayout.jsp").forward(request, response);
         } catch (ServiceException e) {
             e.printStackTrace();
-            response.sendRedirect("WEB-INF/pages/layouts/error.jsp");
+            response.sendRedirect("controller?command=go_to_error_page");
         }
     }
 

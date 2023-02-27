@@ -11,7 +11,6 @@ import java.util.*;
 import java.sql.Date;
 
 public class NewsDAO implements INewsDAO {
-    // TODO закончить внедрение БД (разобраться с датами в БД)
 
     private static final String SQL_SHOW_LIST = "SELECT * FROM news";
     private static final String SQL_SHOW_LAST_NEWS = "SELECT * FROM (SELECT id, content, title, brief, date FROM news ORDER BY id DESC LIMIT ?) newsRow ORDER BY newsRow.id";
@@ -37,6 +36,7 @@ public class NewsDAO implements INewsDAO {
             throw new NewsDAOException("error trying to take connection", e);
         }
     }
+
     @Override
     public List<News> getLatestList(int count) throws NewsDAOException {
         List<News> listResult = new ArrayList<>();

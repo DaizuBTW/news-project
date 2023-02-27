@@ -10,6 +10,7 @@ import java.io.IOException;
 public class GoToErrorPage implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // TODO доработать вывод ошибок
         String message = (String) request.getSession().getAttribute("errorMessage");
         request.getSession(true).setAttribute("errorMessage", message);
         request.setAttribute("presentation", "error");
