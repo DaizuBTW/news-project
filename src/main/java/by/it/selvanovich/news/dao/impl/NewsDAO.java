@@ -8,13 +8,15 @@ import by.it.selvanovich.news.dao.connectionPool.ConnectionPoolException;
 
 import java.sql.*;
 import java.util.*;
+import java.sql.Date;
 
 public class NewsDAO implements INewsDAO {
     // TODO закончить внедрение БД (разобраться с датами в БД)
 
     private static final String SQL_SHOW_LIST = "SELECT * FROM news";
+    private static final String SQL_SHOW_LAST_NEWS = "SELECT * FROM (SELECT id, content, title, brief, date FROM news ORDER BY id DESC LIMIT ?) newsRow ORDER BY newsRow.id";
     private static final String SQL_SHOW_BY_ID = "SELECT * FROM news WHERE id = ?";
-    private static final String SQL_ADD_NEWS = "INSERT INTO news(content,title,brief,users_id) VALUES(?,?,?,?)";
+    private static final String SQL_ADD_NEWS = "INSERT INTO news(content,title,brief,date,users_id) VALUES(?,?,?,?,?)";
     private static final String SQL_UPDATE_NEWS = "UPDATE news SET content=?,title=?,brief=?,users_id=? WHERE id = ?";
     private static final String SQL_DELETE_NEWS = "DELETE FROM news WHERE id = ?";
 
@@ -27,6 +29,7 @@ public class NewsDAO implements INewsDAO {
             while (rs.next()) {
                 listResult.add(new News(rs.getInt(1), rs.getString(3), rs.getString(4), rs.getString(2), rs.getString(5)));
             }
+            Collections.reverse(listResult);
             return listResult;
         } catch (SQLException e) {
             throw new NewsDAOException("sql error", e);
@@ -36,16 +39,21 @@ public class NewsDAO implements INewsDAO {
     }
     @Override
     public List<News> getLatestList(int count) throws NewsDAOException {
-        // ЗАГЛУШКА
-        List<News> result = new ArrayList<>();
-
-        try {
-
-            return result;
-        } catch (Exception e) {
-            throw new NewsDAOException(e);
+        List<News> listResult = new ArrayList<>();
+        try (Connection connection = ConnectionPool.getInstance().takeConnection()) {
+            PreparedStatement ps = connection.prepareStatement(SQL_SHOW_LAST_NEWS);
+            ps.setInt(1, count);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                listResult.add(new News(rs.getInt(1), rs.getString(3), rs.getString(4), rs.getString(2), rs.getString(5)));
+            }
+            Collections.reverse(listResult);
+            return listResult;
+        } catch (SQLException e) {
+            throw new NewsDAOException("sql error", e);
+        } catch (ConnectionPoolException e) {
+            throw new NewsDAOException("error trying to take connection", e);
         }
-
     }
 
     @Override
@@ -66,12 +74,13 @@ public class NewsDAO implements INewsDAO {
     @Override
     public int addNews(News news) throws NewsDAOException {
         try (Connection connection = ConnectionPool.getInstance().takeConnection()) {
+            Date date = new Date(System.currentTimeMillis());
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_ADD_NEWS);
             preparedStatement.setString(1, news.getContent());
             preparedStatement.setString(2, news.getTitle());
             preparedStatement.setString(3, news.getBriefNews());
-            //ps.setDate(4, Date.valueOf(news.getNewsDate()));
-            preparedStatement.setInt(4, 1);
+            preparedStatement.setDate(4, date);
+            preparedStatement.setInt(5, 1);
 
             preparedStatement.executeUpdate();
             return news.getIdNews();
