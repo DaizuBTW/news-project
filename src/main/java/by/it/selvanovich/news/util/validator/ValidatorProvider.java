@@ -1,19 +1,19 @@
 package by.it.selvanovich.news.util.validator;
 
 
-import by.it.selvanovich.news.util.validator.impl.AccessValidation;
+import by.it.selvanovich.news.util.validator.impl.SecurityAccess;
 
 public class ValidatorProvider {
 
     private static final ValidatorProvider instance = new ValidatorProvider();
-    private final IAccessValidation accessValidation = new AccessValidation();
+    private final ISecurityAccess securityAccess = new SecurityAccess();
 
 
     private ValidatorProvider() {
     }
 
-    public IAccessValidation getAccessValidation() {
-        return accessValidation;
+    public ISecurityAccess getSecurityAccess() {
+        return securityAccess;
     }
 
     public static ValidatorProvider getInstance() {

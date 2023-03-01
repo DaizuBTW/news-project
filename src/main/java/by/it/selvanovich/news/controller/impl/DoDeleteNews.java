@@ -4,7 +4,7 @@ import by.it.selvanovich.news.controller.Command;
 import by.it.selvanovich.news.service.INewsService;
 import by.it.selvanovich.news.service.ServiceException;
 import by.it.selvanovich.news.service.ServiceProvider;
-import by.it.selvanovich.news.util.validator.IAccessValidation;
+import by.it.selvanovich.news.util.validator.ISecurityAccess;
 import by.it.selvanovich.news.util.validator.ValidatorProvider;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -16,7 +16,7 @@ import java.io.IOException;
 public class DoDeleteNews implements Command {
 
     private final INewsService newsService = ServiceProvider.getInstance().getNewsService();
-    private final IAccessValidation accessValidation = ValidatorProvider.getInstance().getAccessValidation();
+    private final ISecurityAccess accessValidation = ValidatorProvider.getInstance().getSecurityAccess();
 
 
     @Override

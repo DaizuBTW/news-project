@@ -1,11 +1,11 @@
 package by.it.selvanovich.news.util.validator.impl;
 
-import by.it.selvanovich.news.util.validator.IAccessValidation;
+import by.it.selvanovich.news.util.validator.ISecurityAccess;
 import jakarta.servlet.http.HttpSession;
 
 import java.util.Objects;
 
-public class AccessValidation implements IAccessValidation {
+public class SecurityAccess implements ISecurityAccess {
     @Override
     public boolean haveSession(HttpSession session) {
         return session != null;
