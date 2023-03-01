@@ -23,15 +23,11 @@ public class DoRegistration implements Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String username;
-        String password;
-        String name;
-        String surname;
 
-        username = request.getParameter(JSP_USERNAME_PARAM);
-        password = request.getParameter(JSP_PASSWORD_PARAM);
-        name = request.getParameter(JSP_NAME_PARAM);
-        surname = request.getParameter(JSP_SURNAME_PARAM);
+        String username = request.getParameter(JSP_USERNAME_PARAM);
+        String password = request.getParameter(JSP_PASSWORD_PARAM);
+        String name = request.getParameter(JSP_NAME_PARAM);
+        String surname = request.getParameter(JSP_SURNAME_PARAM);
 
         try {
             service.registration(new User(username, password, name, surname, "user"));

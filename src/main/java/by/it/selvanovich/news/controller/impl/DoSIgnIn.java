@@ -19,13 +19,9 @@ public class DoSIgnIn implements Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // TODO добавить валидаторы
 
-        String username;
-        String password;
-
-        username = request.getParameter(JSP_USERNAME_PARAM);
-        password = request.getParameter(JSP_PASSWORD_PARAM);
+        String username = request.getParameter(JSP_USERNAME_PARAM);
+        String password = request.getParameter(JSP_PASSWORD_PARAM);
 
         try {
 
@@ -38,7 +34,7 @@ public class DoSIgnIn implements Command {
             } else {
                 request.getSession(true).setAttribute("user", "not active");
                 request.setAttribute("AuthenticationError", "wrong login or password");
-                request.getRequestDispatcher("/WEB-INF/pages/layouts/baseLayout.jsp").forward(request, response);
+                request.getRequestDispatcher("controller?command=go_to_news_list").forward(request, response);
             }
 
         } catch (ServiceException e) {

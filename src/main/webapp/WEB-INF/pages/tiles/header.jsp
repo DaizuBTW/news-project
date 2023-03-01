@@ -12,7 +12,7 @@
 		<div class="locals" align="right">
 
 			<a href="controller?command=do_localization&local=en"> <c:out value="${en_button}" /> </a> &nbsp;&nbsp;
-			<a	href="controller?command=do_localization&local=ru"> <c:out value="${ru_button}" /> </a> <br /> <br />
+			<a href="controller?command=do_localization&local=ru"> <c:out value="${ru_button}" /> </a> <br /> <br />
 		</div>
 
 		<c:if test="${not (sessionScope.user eq 'active')}">
@@ -26,7 +26,10 @@
 					<c:if test="${not (requestScope.AuthenticationError eq null)}">
 						<font color="red">
 							<c:out value="${login_error}" />
-						</font> 
+						</font>
+						<script>
+							window.alert("<c:out value="${login_error}" />");
+						</script>
 					</c:if>
 					<div class="signin-btn">
 						<input type="submit" value="<c:out value="${header_singin}" />" />

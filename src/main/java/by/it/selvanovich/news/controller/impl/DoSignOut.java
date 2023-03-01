@@ -13,6 +13,7 @@ public class DoSignOut implements Command {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         request.getSession(true).setAttribute("user", "not active");
+        request.getSession().setAttribute("role", null);
         response.sendRedirect("index.jsp");
 
     }

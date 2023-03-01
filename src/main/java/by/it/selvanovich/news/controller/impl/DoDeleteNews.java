@@ -4,26 +4,34 @@ import by.it.selvanovich.news.controller.Command;
 import by.it.selvanovich.news.service.INewsService;
 import by.it.selvanovich.news.service.ServiceException;
 import by.it.selvanovich.news.service.ServiceProvider;
+import by.it.selvanovich.news.util.validator.IAccessValidation;
+import by.it.selvanovich.news.util.validator.ValidatorProvider;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
 public class DoDeleteNews implements Command {
-    // TODO добавить валидаторы
 
     private final INewsService newsService = ServiceProvider.getInstance().getNewsService();
+    private final IAccessValidation accessValidation = ValidatorProvider.getInstance().getAccessValidation();
 
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String[] id;
-        id = request.getParameterValues("id");
+        String[] id = request.getParameterValues("id");
+
+        HttpSession session = request.getSession();
 
         try {
-            newsService.delete(id);
+            if (accessValidation.haveAdminPermissions(session)) {
+                newsService.delete(id);
+            } else {
+                // TODO вывод сообщения с ошибкой
+            }
             response.sendRedirect("controller?command=go_to_news_list");
         } catch (ServiceException e) {
             e.printStackTrace();

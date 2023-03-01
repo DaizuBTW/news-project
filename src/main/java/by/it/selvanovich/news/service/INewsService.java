@@ -11,7 +11,7 @@ public interface INewsService {
 
     List<News> latestList(int count) throws ServiceException;
 
-    List<News> list() throws ServiceException;
+    List<News> getList() throws ServiceException;
 
     News findById(int id) throws ServiceException;
 

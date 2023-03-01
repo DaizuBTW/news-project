@@ -33,7 +33,7 @@ public class NewsServiceImpl implements INewsService {
     }
 
     @Override
-    public List<News> list() throws ServiceException {
+    public List<News> getList() throws ServiceException {
         try {
             return newsDAO.getList();
         } catch (NewsDAOException e) {
