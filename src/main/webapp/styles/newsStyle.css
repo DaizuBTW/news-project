@@ -34,6 +34,7 @@ textarea {
 	min-width: 500px;
 	min-height: 500px;
 	position: relative;
+	width: 1200px;
 }
 
 .header {
@@ -117,6 +118,19 @@ textarea {
     box-shadow: 0 0.1rem 0.5rem var(--color-light);
 }
 
+.menu-lang {
+	background: var(--color-white);
+	margin: 10px;
+	border-radius: 0.5rem;
+	box-shadow: 0 0.1rem 0.5rem var(--color-light);
+	bottom: 0;
+	display: flex;
+	position: absolute;
+	min-width: 280px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
 .menu-title {
 	padding-top: 5px;
 	padding-bottom: 5px;
@@ -138,7 +152,6 @@ textarea {
 
 .menu-title-wrapper {
 	padding-bottom: 5px;
-	padding-left: 5px;
 	padding-top: 5px;
 } 
 
@@ -221,6 +234,12 @@ textarea {
 
 .locals {
 	height: 20px;
+}
+
+.local-link a {
+	padding-right: 10px;
+	font-weight: 500;
+	font-size: 18px;
 }
 
 .body-title {

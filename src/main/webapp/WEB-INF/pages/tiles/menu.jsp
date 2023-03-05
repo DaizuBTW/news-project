@@ -10,14 +10,15 @@
 				<c:out value="${label_news}" />
 		</div>
 	</div>
-
 	<div class="list-menu-invisible-wrapper">
+		<hr>
 		<div class="list-menu-wrapper">
 			<ul style="list-style-image: url(/images/img.jpg); text-align: left;">
 				<li style="padding-left: 15px;">
 				
 				<a href="controller?command=go_to_news_list"><c:out value="${menu_news_list}" /></a><br />
 				</li>
+
 
 				<c:if test="${sessionScope.role eq 'admin'}">
 					<li style="padding-left: 15px;">
@@ -30,6 +31,11 @@
 			</ul>
 		</div>
 		<div class="clear"></div>
+
 	</div>
+</div>
+<div class="menu-lang">
+		<a href="controller?command=do_localization&local=en"> <c:out value="${en_button}" /> </a>
+		<a href="controller?command=do_localization&local=ru"> <c:out value="${ru_button}" /> </a>
 </div>
 

@@ -30,6 +30,7 @@ public class DoSIgnIn implements Command {
             if (!role.equals("guest")) {
                 request.getSession(true).setAttribute("user", "active");
                 request.getSession().setAttribute("role", role);
+                request.getSession().setAttribute("username", username);
                 response.sendRedirect("controller?command=go_to_news_list");
             } else {
                 request.getSession(true).setAttribute("user", "not active");

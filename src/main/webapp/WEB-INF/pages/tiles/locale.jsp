@@ -7,6 +7,16 @@
 
 	<fmt:message bundle="${loc}" key="local.error.name.global_error" var="error" />
 
+
+	<fmt:message bundle="${loc}" key="local.popup.login" var="popup_login" />
+	<fmt:message bundle="${loc}" key="local.popup.password" var="popup_password" />
+	<fmt:message bundle="${loc}" key="local.popup.name" var="popup_name" />
+	<fmt:message bundle="${loc}" key="local.popup.surname" var="popup_surname" />
+	<fmt:message bundle="${loc}" key="local.popup.button.enter" var="popup_btn_enter" />
+	<fmt:message bundle="${loc}" key="local.popup.button.register" var="popup_btn_register" />
+	<fmt:message bundle="${loc}" key="local.popup.label.register" var="popup_label_register" />
+	<fmt:message bundle="${loc}" key="local.popup.label.signin" var="popup_label_signin" />
+
 	<fmt:message bundle="${loc}" key="local.header.login" var="header_login" />
 	<fmt:message bundle="${loc}" key="local.header.password" var="header_password" />
 	<fmt:message bundle="${loc}" key="local.header.registration" var="header_registration" />
