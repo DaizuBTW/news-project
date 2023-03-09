@@ -6,5 +6,6 @@ public interface IUserService {
 	
 	String authorization(String username, String password) throws ServiceException;
 	boolean registration(User user) throws ServiceException;
+	User getUserDetails(String username) throws ServiceException;
 
 }

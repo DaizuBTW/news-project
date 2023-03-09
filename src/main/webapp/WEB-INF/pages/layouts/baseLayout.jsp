@@ -34,7 +34,15 @@
 
             <c:if test="${not (sessionScope.user eq 'active')}">
                 <div class="menu-wrapper">
-                    <p><c:out value="${message}"/></p>
+                    <div class="menu-title-wrapper">
+                        <div class="menu-title">
+                            <h3><c:out value="${welcome_label}"/></h3>
+                        </div>
+                    </div>
+                    <div class="list-menu-invisible-wrapper">
+                        <hr>
+                        <p class="welcome"><c:out value="${welcome_message}"/></p>
+                    </div>
                 </div>
                 <div class="menu-lang">
                     <a href="controller?command=do_localization&local=en"> <c:out value="${en_button}"/> </a>
@@ -71,26 +79,21 @@
             <a class="close">x</a>
             <h3>Sign in</h3>
             <form class="pop-up" action="controller" method="post">
-                <input type="hidden" name="command" value="do_sign_in" />
+                <input type="hidden" name="command" value="do_sign_in"/>
                 <label for="username">
                     Username:
-                    <input type="text" name="username" value="admin" id="username" placeholder="<c:out value="${header_login}" /> "/><br />
+                    <input type="text" name="username" value="admin" id="username"
+                           placeholder="<c:out value="${header_login}" /> "/><br/>
 
                     <!--<input type="text" name="username" id="username" placeholder="Username must be between 8 and 20 characters" pattern="^[a-zA-Z][a-zA-Z0-9-_.]{8,20}$" required />-->
                 </label>
                 <label for="password">
                     Password:
                     <!--<input type="password" name="password" id="password" placeholder="Password must contain 1 uppercase, lowercase and number" pattern="(?=^.{8,}$)((?=.*d)|(?=.*W+))(?![.n])(?=.*[A-Z])(?=.*[a-z]).*$" required />-->
-                    <input type="password" name="password" value="admin" id="password" placeholder="<c:out value="${header_password}" />"/><br />
+                    <input type="password" name="password" value="admin" id="password"
+                           placeholder="<c:out value="${header_password}" />"/><br/>
                 </label>
-                <c:if test="${not (requestScope.AuthenticationError eq null)}">
-                    <font color="red">
-                        <c:out value="${login_error}" />
-                    </font>
-                    <script>
-                        window.alert("<c:out value="${login_error}" />");
-                    </script>
-                </c:if>
+
                 <button type="submit">Sign in</button>
             </form>
         </div>

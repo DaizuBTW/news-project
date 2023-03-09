@@ -91,7 +91,7 @@ textarea {
 	position: absolute;
 	bottom: 0;
 	left: 0;
-	width: 1000px;
+	width: 1200px;
 	height: 20px;
 	
 	margin-left: -1px;
@@ -109,6 +109,13 @@ textarea {
 .menu-wrapper p {
     padding: 10px;
     text-align: center;
+}
+
+p.welcome {
+	font-weight: 200;
+	font-size: 12pt;
+	line-height: 1rem;
+	color: var(--color-darkgrey);
 }
 
  .menu-wrapper {
@@ -169,6 +176,7 @@ textarea {
 	text-align: left;
 	color: var(--color-green);
 	font-weight: bold;
+	line-height: 2rem;
 }
 
 .local-link {
@@ -381,5 +389,22 @@ input[type="submit"]:hover {
 .error-box{
 	margin-top: 10px;
 	text-align: center;	
+}
+
+p.username {
+	font-size: 11pt;
+	font-weight: 300;
+	color: var(--color-green);
+}
+
+p.name {
+	font-size: 15pt;
+	font-weight: 500;
+}
+
+p.category {
+	font-size: 12pt;
+	font-weight: 200;
+	color: #707070;
 }
 

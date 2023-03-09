@@ -7,6 +7,9 @@
 
 	<fmt:message bundle="${loc}" key="local.error.name.global_error" var="error" />
 
+	<fmt:message bundle="${loc}" key="local.menu.welcome.label" var="welcome_label" />
+	<fmt:message bundle="${loc}" key="local.menu.welcome.message" var="welcome_message" />
+
 
 	<fmt:message bundle="${loc}" key="local.popup.login" var="popup_login" />
 	<fmt:message bundle="${loc}" key="local.popup.password" var="popup_password" />

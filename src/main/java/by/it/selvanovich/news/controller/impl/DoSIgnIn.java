@@ -1,5 +1,6 @@
 package by.it.selvanovich.news.controller.impl;
 
+import by.it.selvanovich.news.bean.User;
 import by.it.selvanovich.news.controller.Command;
 import by.it.selvanovich.news.service.IUserService;
 import by.it.selvanovich.news.service.ServiceException;
@@ -26,11 +27,14 @@ public class DoSIgnIn implements Command {
         try {
 
             String role = service.authorization(username, password);
+            User user = service.getUserDetails(username);
 
             if (!role.equals("guest")) {
                 request.getSession(true).setAttribute("user", "active");
                 request.getSession().setAttribute("role", role);
                 request.getSession().setAttribute("username", username);
+                request.getSession().setAttribute("name", user.getName());
+                request.getSession().setAttribute("surname", user.getSurname());
                 response.sendRedirect("controller?command=go_to_news_list");
             } else {
                 request.getSession(true).setAttribute("user", "not active");

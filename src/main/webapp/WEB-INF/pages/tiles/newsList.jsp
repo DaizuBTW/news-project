@@ -13,6 +13,7 @@
 		<div class="single-news-wrapper">
 			<div class="single-news-header-wrapper">
 				<div class="news-title">
+					<p class="category">Политика</p>
 					<h2><c:out value="${news.title}" /></h2>
 				</div>
 				<div class="news-date">

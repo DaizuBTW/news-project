@@ -7,11 +7,11 @@
 <form class="pop-up" action="controller" method="post">
     <input type="hidden" name="command" value="do_sign_in" />
     <label for="username">
-        <c:out value="${popup_login}" />
+        <p class="label_popup"><c:out value="${popup_login}" /></p>
         <input type="text" name="username" value="admin" id="username" placeholder="<c:out value="${header_login}" /> "/>
     </label>
     <label for="password">
-        <c:out value="${popup_password}" />
+        <p class="label_popup"><c:out value="${popup_password}" /></p>
         <input type="password" name="password" value="admin" id="password" placeholder="<c:out value="${header_password}" />"/>
     </label>
     <input type="submit" name="log-in" id="" value="<c:out value="${popup_btn_enter}" />">

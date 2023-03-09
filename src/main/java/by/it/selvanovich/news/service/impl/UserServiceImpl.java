@@ -14,13 +14,13 @@ public class UserServiceImpl implements IUserService {
     @Override
     public String authorization(String username, String password) throws ServiceException {
         try {
-            if(userDAO.authorization(username, password)) {
+            if (userDAO.authorization(username, password)) {
                 return userDAO.getRole(username);
-            }else {
+            } else {
                 return "guest";
             }
 
-        }catch(DAOException e) {
+        } catch (DAOException e) {
             throw new ServiceException(e);
         }
     }
@@ -30,7 +30,16 @@ public class UserServiceImpl implements IUserService {
         try {
             userDAO.registration(user);
             return true;
-        }catch(DAOException e) {
+        } catch (DAOException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public User getUserDetails(String username) throws ServiceException {
+        try {
+            return userDAO.getUserDetails(username);
+        } catch (DAOException e) {
             throw new ServiceException(e);
         }
     }
