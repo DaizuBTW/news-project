@@ -6,6 +6,18 @@
 
 <div class="body-title">
 	<c:out value="${menu_news_list}" />
+	<form class="news-filter">
+		<select name="category">
+			<optgroup label="category">
+				<option value="*" selected>all</option>
+				<option value="1">2</option>
+				<option value="2">3</option>
+				<option value="3" label="Лариса">4</option>
+			</optgroup>
+		</select>
+		<input type="hidden" name="command" value="go_to_news_list" />
+		<input type="submit" value="<c:out value="${button_add}" />" />
+	</form>
 </div>
 
 <form action="controller" method="post">
@@ -13,7 +25,7 @@
 		<div class="single-news-wrapper">
 			<div class="single-news-header-wrapper">
 				<div class="news-title">
-					<p class="category">Политика</p>
+					<p class="category"><c:out value="${news.category}" /></p>
 					<h2><c:out value="${news.title}" /></h2>
 				</div>
 				<div class="news-date">

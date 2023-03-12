@@ -31,12 +31,13 @@ public class DoAddNews implements Command {
         String date = request.getParameter(JSP_DATE_PARAM);
         String brief = request.getParameter(JSP_BRIEF_PARAM);
         String content = request.getParameter(JSP_CONTENT_PARAM);
+        String category = request.getParameter(JSP_DATE_PARAM);
 
         HttpSession session = request.getSession();
 
         try {
             if (accessValidation.haveAdminPermissions(session)) {
-                service.addNews(title, brief, content, date);
+                service.addNews(title, brief, content, date, category);
             } else {
                 // TODO вывод сообщения с ошибкой
             }

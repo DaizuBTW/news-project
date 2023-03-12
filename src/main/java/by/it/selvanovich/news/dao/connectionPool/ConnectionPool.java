@@ -44,7 +44,6 @@ public final class ConnectionPool {
     }
 
     public void initPoolData() throws ConnectionPoolException {
-        Locale.setDefault(Locale.ENGLISH);
         try {
             Class.forName(driverName);
             givenAwayConQueue = new
@@ -93,30 +92,40 @@ public final class ConnectionPool {
 
     public void closeConnection(Connection con, Statement st, ResultSet rs) {
         try {
-            con.close();
+            if (con != null) {
+                con.close();
+            }
         } catch (SQLException e) {
 // logger.log(Level.ERROR, "Connection isn't return to the pool. ");
         }
         try {
-            rs.close();
-        } catch (SQLException e) {
-// logger.log(Level.ERROR, "ResultSet isn't closed.");
-        }
-        try {
-            st.close();
+            if (st != null) {
+                st.close();
+            }
         } catch (SQLException e) {
 // logger.log(Level.ERROR, "Statement isn't closed.");
+        }
+        try {
+            if (rs != null) {
+                rs.close();
+            }
+        } catch (SQLException e) {
+// logger.log(Level.ERROR, "ResultSet isn't closed.");
         }
     }
 
     public void closeConnection(Connection con, Statement st) {
         try {
-            con.close();
+            if (con != null) {
+                con.close();
+            }
         } catch (SQLException e) {
 // logger.log(Level.ERROR, "Connection isn't return to the pool. ");
         }
         try {
-            st.close();
+            if (st != null) {
+                st.close();
+            }
         } catch (SQLException e) {
 // logger.log(Level.ERROR, "Statement isn't closed.");
         }

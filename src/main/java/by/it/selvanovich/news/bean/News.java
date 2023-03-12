@@ -13,16 +13,19 @@ public class News implements Serializable {
     private String content = "";
     private String date = "";
 
+    private String category = "";
+
     public News() {
     }
 
-    public News(int id, String title, String brief, String content, String date) {
+    public News(int id, String title, String brief, String content, String date, String category) {
         super();
         this.id = id;
         this.title = title;
         this.brief = brief;
         this.content = content;
         this.date = date;
+        this.category = category;
     }
 
     public Integer getIdNews() {
@@ -58,6 +61,14 @@ public class News implements Serializable {
 
     }
 
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
     public String getNewsDate() {
         return date;
     }
@@ -71,12 +82,12 @@ public class News implements Serializable {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
         News news = (News) obj;
-        return Objects.equals(id, news.id) && Objects.equals(title, news.title) && Objects.equals(brief, news.brief) && Objects.equals(content, news.content) && Objects.equals(date, news.date);
+        return Objects.equals(id, news.id) && Objects.equals(title, news.title) && Objects.equals(brief, news.brief) && Objects.equals(content, news.content) && Objects.equals(date, news.date) && Objects.equals(category, news.category);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, brief, content, date);
+        return Objects.hash(id, title, brief, content, date, category);
     }
 
 }

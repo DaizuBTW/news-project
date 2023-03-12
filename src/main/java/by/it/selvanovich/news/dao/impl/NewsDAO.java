@@ -15,12 +15,19 @@ public class NewsDAO implements INewsDAO {
     private static final String ERR_MESSAGE_SQL = "sql error";
     private static final String ERR_MESSAGE_CONNECTION_POOL = "error trying to take connection";
 
-    private static final String SQL_SHOW_LIST = "SELECT * FROM news";
-    private static final String SQL_SHOW_LAST_NEWS_LIST = "SELECT * FROM (SELECT id, content, title, brief, date FROM news ORDER BY id DESC LIMIT ?) newsRow ORDER BY newsRow.id";
-    private static final String SQL_SHOW_BY_ID = "SELECT * FROM news WHERE id = ?";
+    private static final String SQL_SHOW_LIST = "SELECT id, title, brief, content, date, category " +
+            "FROM news JOIN newscategory n on news.category_id = n.news_category_id";
+    private static final String SQL_SHOW_LAST_NEWS_LIST = "SELECT id, title, brief, content, date, category " +
+            "FROM (SELECT id, content, title, brief, date, category_id " +
+            "FROM news ORDER BY id DESC LIMIT ?)newsRow JOIN newscategory n " +
+            "ON newsRow.category_id = n.news_category_id ORDER BY newsRow.id";
+    private static final String SQL_SHOW_BY_ID = "SELECT id, title, brief, content, date, category " +
+            "FROM news JOIN newscategory n on news.category_id = n.news_category_id WHERE id = ?";
     private static final String SQL_ADD_NEWS = "INSERT INTO news(content,title,brief,date,users_id) VALUES(?,?,?,?,?)";
     private static final String SQL_UPDATE_NEWS = "UPDATE news SET content=?,title=?,brief=?,users_id=? WHERE id = ?";
     private static final String SQL_DELETE_NEWS = "DELETE FROM news WHERE id = ?";
+
+    private static final ConnectionPool connectionPool = ConnectionPool.getInstance();
 
     @Override
     public List<News> getList() throws NewsDAOException {
@@ -29,7 +36,8 @@ public class NewsDAO implements INewsDAO {
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(SQL_SHOW_LIST);
             while (rs.next()) {
-                listResult.add(new News(rs.getInt(1), rs.getString(3), rs.getString(4), rs.getString(2), rs.getString(5)));
+                listResult.add(new News(rs.getInt(1), rs.getString(2), rs.getString(3),
+                        rs.getString(4), rs.getString(5), rs.getString(6)));
             }
             Collections.reverse(listResult);
             return listResult;
@@ -48,7 +56,8 @@ public class NewsDAO implements INewsDAO {
             ps.setInt(1, count);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                listResult.add(new News(rs.getInt(1), rs.getString(3), rs.getString(4), rs.getString(2), rs.getString(5)));
+                listResult.add(new News(rs.getInt(1), rs.getString(2), rs.getString(3),
+                        rs.getString(4), rs.getString(5), rs.getString(6)));
             }
             Collections.reverse(listResult);
             return listResult;
@@ -66,7 +75,8 @@ public class NewsDAO implements INewsDAO {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             rs.next();
-            return new News(rs.getInt(1), rs.getString(3), rs.getString(4), rs.getString(2), rs.getString(5));
+            return new News(rs.getInt(1), rs.getString(2), rs.getString(3),
+                    rs.getString(4), rs.getString(5), rs.getString(6));
         } catch (SQLException e) {
             throw new NewsDAOException(ERR_MESSAGE_SQL, e);
         } catch (ConnectionPoolException e) {

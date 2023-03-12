@@ -14,9 +14,9 @@ public class NewsServiceImpl implements INewsService {
     private final INewsDAO newsDAO = DAOProvider.getInstance().getNewsDAO();
 
     @Override
-    public void update(int id, String title, String brief, String content, String date) throws ServiceException {
+    public void update(int id, String title, String brief, String content, String date, String category) throws ServiceException {
         try {
-            newsDAO.updateNews(id, new News(id, title, brief, content, date));
+            newsDAO.updateNews(id, new News(id, title, brief, content, date, category));
         } catch (NewsDAOException e) {
             throw new ServiceException(e);
         }
@@ -51,9 +51,9 @@ public class NewsServiceImpl implements INewsService {
     }
 
     @Override
-    public void addNews(String title, String brief, String content, String date) throws ServiceException {
+    public void addNews(String title, String brief, String content, String date, String category) throws ServiceException {
         try {
-            newsDAO.addNews(new News(1, title, brief, content, date));
+            newsDAO.addNews(new News(1, title, brief, content, date, category));
         } catch (NewsDAOException e) {
             throw new ServiceException(e);
         }

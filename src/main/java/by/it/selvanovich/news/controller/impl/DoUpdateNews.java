@@ -23,6 +23,7 @@ public class DoUpdateNews implements Command {
     private static final String JSP_BRIEF_PARAM = "brief";
     private static final String JSP_CONTENT_PARAM = "content";
     private static final String JSP_DATE_PARAM = "date";
+    private static final String JSP_CATEGORY_PARAM = "category";
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -34,12 +35,13 @@ public class DoUpdateNews implements Command {
         String brief = request.getParameter(JSP_BRIEF_PARAM);
         String content = request.getParameter(JSP_CONTENT_PARAM);
         String date = request.getParameter(JSP_DATE_PARAM);
+        String category = request.getParameter(JSP_DATE_PARAM);
 
         HttpSession session = request.getSession();
 
         try {
             if (accessValidation.haveAdminPermissions(session)) {
-                newsService.update(Integer.parseInt(id), title, brief, content, date);
+                newsService.update(Integer.parseInt(id), title, brief, content, date, category);
             } else {
                 // TODO вывод сообщения с ошибкой
             }
