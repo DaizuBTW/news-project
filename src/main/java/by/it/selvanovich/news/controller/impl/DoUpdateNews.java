@@ -35,7 +35,7 @@ public class DoUpdateNews implements Command {
         String brief = request.getParameter(JSP_BRIEF_PARAM);
         String content = request.getParameter(JSP_CONTENT_PARAM);
         String date = request.getParameter(JSP_DATE_PARAM);
-        String category = request.getParameter(JSP_DATE_PARAM);
+        String category = request.getParameter(JSP_CATEGORY_PARAM);
 
         HttpSession session = request.getSession();
 

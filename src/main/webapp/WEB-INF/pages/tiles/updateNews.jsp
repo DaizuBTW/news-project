@@ -16,16 +16,13 @@
                 <td class="space_around_view_text"><div class="word-breaker">
                     <textarea name="title" cols="40" rows="2" required
                               placeholder="<c:out value="${requestScope.news.title }" />"
-                              value="<c:out value="${requestScope.news.title }" />"
-                    ></textarea>
+                    ><c:out value="${requestScope.news.title }" /></textarea>
                 </div></td>
             </tr>
             <tr>
                 <td class="space_around_title_text"><c:out value="${news_date}" /></td>
                 <td class="space_around_view_text"><div class="word-breaker">
-                    <textarea name="date" cols="40" rows="1" required
-                              placeholder="<c:out value="${requestScope.news.newsDate }" />"
-                    ></textarea>
+                    <input type="datetime-local" name="date" value="<c:out value="${requestScope.news.newsDate }" />">
                 </div></td>
             </tr>
             <tr>
@@ -33,7 +30,7 @@
                 <td class="space_around_view_text"><div class="word-breaker">
                     <textarea name="brief" cols="40" rows="2" required
                               placeholder="<c:out value="${requestScope.news.briefNews }" />"
-                    ></textarea>
+                    ><c:out value="${requestScope.news.briefNews }" /></textarea>
                 </div></td>
             </tr>
             <tr>
@@ -41,7 +38,17 @@
                 <td class="space_around_view_text"><div class="word-breaker">
                     <textarea name="content" cols="40" rows="3" required
                               placeholder="<c:out value="${requestScope.news.content }" />"
-                    ></textarea>
+                    ><c:out value="${requestScope.news.content }" /></textarea>
+                </div></td>
+            </tr>
+            <tr>
+                <td class="space_around_title_text"><c:out value="${category_label}" /></td>
+                <td class="space_around_view_text"><div class="word-breaker">
+                    <select name="category">
+                        <option value="1"><c:out value="${sport}" /></option>
+                        <option value="2"><c:out value="${society}" /></option>
+                        <option value="3"><c:out value="${weather}" /></option>
+                    </select>
                 </div></td>
             </tr>
         </table>

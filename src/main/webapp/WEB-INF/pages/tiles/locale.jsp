@@ -39,6 +39,7 @@
 	<fmt:message bundle="${loc}" key="local.body.button.update" var="button_update" />
 	<fmt:message bundle="${loc}" key="local.body.button.more" var="button_more" />
 	<fmt:message bundle="${loc}" key="local.body.button.back_to_news" var="button_back_to_news" />
+	<fmt:message bundle="${loc}" key="local.body.button.apply" var="button_apply" />
 
 	<fmt:message bundle="${loc}" key="local.label.news" var="label_news" />
 	<fmt:message bundle="${loc}" key="local.label.update" var="label_update" />
@@ -48,5 +49,11 @@
 	<fmt:message bundle="${loc}" key="local.news.date" var="news_date" />
 	<fmt:message bundle="${loc}" key="local.news.brief" var="news_brief" />
 	<fmt:message bundle="${loc}" key="local.news.content" var="news_content" />
+
+	<fmt:message bundle="${loc}" key="local.category.society" var="society" />
+	<fmt:message bundle="${loc}" key="local.category.sport" var="sport" />
+	<fmt:message bundle="${loc}" key="local.category.weather" var="weather" />
+	<fmt:message bundle="${loc}" key="local.category.label" var="category_label" />
+	<fmt:message bundle="${loc}" key="local.category.all" var="category_all" />
 
 </head>

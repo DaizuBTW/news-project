@@ -8,15 +8,15 @@
 	<c:out value="${menu_news_list}" />
 	<form class="news-filter">
 		<select name="category">
-			<optgroup label="category">
-				<option value="*" selected>all</option>
-				<option value="1">2</option>
-				<option value="2">3</option>
-				<option value="3" label="Лариса">4</option>
+			<optgroup label="<c:out value="${category_label}" />">
+				<option value="0" selected><c:out value="${category_all}" /></option>
+				<option value="1"><c:out value="${sport}" /></option>
+				<option value="2"><c:out value="${society}" /></option>
+				<option value="3"><c:out value="${weather}" /></option>
 			</optgroup>
 		</select>
 		<input type="hidden" name="command" value="go_to_news_list" />
-		<input type="submit" value="<c:out value="${button_add}" />" />
+		<input type="submit" value="<c:out value="${button_apply}" />" />
 	</form>
 </div>
 
@@ -50,8 +50,8 @@
 				</div>
 			</div>
 		</div>
-
 	</c:forEach>
+
 
 	<c:if test="${sessionScope.role eq 'admin'}">
 		<div class="body-button-position">
@@ -59,10 +59,7 @@
 				<input type="submit" value="<c:out value="${button_delete}" />" />
 		</div>
 	</c:if>
-
-	<div class="no-news">
-		<c:if test="${requestScope.news eq null}">
-        	No news.
-		</c:if>
-	</div>
+	<c:if test="${requestScope.news eq null}">
+		<p>No news.</p>
+	</c:if>
 </form>

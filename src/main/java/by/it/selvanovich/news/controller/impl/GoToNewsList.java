@@ -23,13 +23,14 @@ public class GoToNewsList implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        String category = request.getParameter("category");
         List<News> newsList;
 
         HttpSession session = request.getSession();
 
         try {
             if (accessValidation.haveAuthorizedUser(session)) {
-                newsList = newsService.getList();
+                newsList = newsService.getList(category);
                 request.setAttribute("presentation", "newsList");
             } else {
                 newsList = newsService.latestList(5);

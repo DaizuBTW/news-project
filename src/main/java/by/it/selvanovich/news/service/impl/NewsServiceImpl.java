@@ -33,9 +33,13 @@ public class NewsServiceImpl implements INewsService {
     }
 
     @Override
-    public List<News> getList() throws ServiceException {
+    public List<News> getList(String category) throws ServiceException {
         try {
-            return newsDAO.getList();
+            if (category == null || category.equals("0")) {
+                return newsDAO.getList();
+            } else {
+                return newsDAO.getListByFilter(Integer.parseInt(category));
+            }
         } catch (NewsDAOException e) {
             throw new ServiceException(e);
         }

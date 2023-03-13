@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface INewsDAO {
     List<News> getList() throws NewsDAOException;
+    List<News> getListByFilter(int category) throws NewsDAOException;
 
     List<News> getLatestList(int count) throws NewsDAOException;
 

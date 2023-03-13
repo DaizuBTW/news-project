@@ -20,9 +20,8 @@
             </tr>
             <tr>
                 <td class="space_around_title_text"><c:out value="${news_date}" /></td>
-
                 <td class="space_around_view_text"><div class="word-breaker">
-                    <textarea name="date" cols="40" rows="1" required placeholder="<c:out value="${news_date}" />"></textarea>
+                    <input type="datetime-local" name="date">
                 </div></td>
             </tr>
             <tr>
@@ -35,6 +34,16 @@
                 <td class="space_around_title_text"><c:out value="${news_content}" /></td>
                 <td class="space_around_view_text"><div class="word-breaker">
                     <textarea name="content" cols="40" rows="3" required placeholder="<c:out value="${news_content}" />"></textarea>
+                </div></td>
+            </tr>
+            <tr>
+                <td class="space_around_title_text"><c:out value="${category_label}" /></td>
+                <td class="space_around_view_text"><div class="word-breaker">
+                    <select name="category">
+                        <option value="1"><c:out value="${sport}" /></option>
+                        <option value="2"><c:out value="${society}" /></option>
+                        <option value="3"><c:out value="${weather}" /></option>
+                    </select>
                 </div></td>
             </tr>
         </table>
