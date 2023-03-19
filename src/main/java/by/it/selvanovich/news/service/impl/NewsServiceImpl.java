@@ -1,6 +1,7 @@
 package by.it.selvanovich.news.service.impl;
 
 import java.util.List;
+import java.util.concurrent.locks.ReentrantLock;
 
 import by.it.selvanovich.news.bean.News;
 import by.it.selvanovich.news.dao.DAOProvider;
@@ -8,17 +9,30 @@ import by.it.selvanovich.news.dao.INewsDAO;
 import by.it.selvanovich.news.dao.NewsDAOException;
 import by.it.selvanovich.news.service.INewsService;
 import by.it.selvanovich.news.service.ServiceException;
+import by.it.selvanovich.news.util.validator.INewsValidator;
+import by.it.selvanovich.news.util.validator.ValidatorProvider;
 
 public class NewsServiceImpl implements INewsService {
 
     private final INewsDAO newsDAO = DAOProvider.getInstance().getNewsDAO();
+    private final INewsValidator newsValidator = ValidatorProvider.getInstance().getNewsValidator();
+    private final static ReentrantLock locker = new ReentrantLock();
 
     @Override
-    public void update(int id, String title, String brief, String content, String date, String category) throws ServiceException {
+    public boolean update(int id, String title, String brief, String content, String date, String category) throws ServiceException {
+        locker.lock();
         try {
-            newsDAO.updateNews(id, new News(id, title, brief, content, date, category));
+            News news = new News(id, title, brief, content, date, category);
+            if (newsValidator.isNewsValid(news)) {
+                newsDAO.updateNews(id, news);
+                return true;
+            } else {
+                return false;
+            }
         } catch (NewsDAOException e) {
             throw new ServiceException(e);
+        } finally {
+            locker.unlock();
         }
     }
 
@@ -55,20 +69,33 @@ public class NewsServiceImpl implements INewsService {
     }
 
     @Override
-    public void addNews(String title, String brief, String content, String date, String category) throws ServiceException {
+    public boolean addNews(String title, String brief, String content, String date, String category) throws ServiceException {
+        locker.lock();
         try {
-            newsDAO.addNews(new News(1, title, brief, content, date, category));
+            News news = new News(title, brief, content, date, category);
+            if (newsValidator.isNewsValid(news)) {
+                newsDAO.addNews(new News(title, brief, content, date, category));
+                return true;
+            } else {
+                return false;
+            }
         } catch (NewsDAOException e) {
             throw new ServiceException(e);
+        } finally {
+            locker.unlock();
         }
     }
 
     @Override
-    public void delete(String[] idNewses) throws ServiceException {
+    public boolean delete(String[] idNewses) throws ServiceException {
+        locker.lock();
         try {
             newsDAO.deleteNewses(idNewses);
+            return true;
         } catch (Exception e) {
             throw new ServiceException(e);
+        } finally {
+            locker.unlock();
         }
     }
 }

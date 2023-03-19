@@ -7,7 +7,7 @@ import by.it.selvanovich.news.dao.NewsDAOException;
 
 public interface INewsService {
 
-    void update(int id, String title, String brief, String content, String date, String category) throws ServiceException;
+    boolean update(int id, String title, String brief, String content, String date, String category) throws ServiceException;
 
     List<News> latestList(int count) throws ServiceException;
 
@@ -15,7 +15,7 @@ public interface INewsService {
 
     News findById(int id) throws ServiceException;
 
-    void addNews(String title, String brief, String content, String date, String category) throws ServiceException;
+    boolean addNews(String title, String brief, String content, String date, String category) throws ServiceException;
 
-    void delete(String[] idNewses) throws ServiceException;
+    boolean delete(String[] idNewses) throws ServiceException;
 }
