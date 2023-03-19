@@ -7,9 +7,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class UserValidator implements IUserValidator {
-    private static String REGEX_NAME = "(^[a-zA-Zа-яА-Я][a-zA-Zа-яА-Я\\S]{0,20}[a-zA-Zа-яА-Я]$)";
-    private static String REGEX_USERNAME = "(^[a-zA-Z0-9][a-zA-Z0-9\\S]{0,20}[a-zA-Z0-9]$)";
-    private static String REGEX_PASSWORD = "(^[a-zA-Z0-9][a-zA-Z0-9\\S]{6,20}[a-zA-Z0-9]$)";
+
+    private static final String REGEX_NAME = "(^[a-zA-Zа-яА-Я][a-zA-Zа-яА-Я\\S]{0,20}[a-zA-Zа-яА-Я]$)";
+    private static final String REGEX_USERNAME = "(^[a-zA-Z0-9][a-zA-Z0-9\\S]{0,20}[a-zA-Z0-9]$)";
+    private static final String REGEX_PASSWORD = "(^[a-zA-Z0-9][a-zA-Z0-9\\S]{6,20}[a-zA-Z0-9]$)";
 
     @Override
     public boolean isUsernameValid(String username) {
