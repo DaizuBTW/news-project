@@ -111,6 +111,12 @@ textarea {
     text-align: center;
 }
 
+.menu-wrapper-error p {
+    padding: 10px;
+    text-align: center;
+	color: red;
+}
+
 p.welcome {
 	font-weight: 200;
 	font-size: 12pt;
@@ -123,6 +129,13 @@ p.welcome {
     margin: 10px;
     border-radius: 0.5rem;
     box-shadow: 0 0.1rem 0.5rem var(--color-light);
+}
+
+.menu-wrapper-error {
+	background: #ffe0e0;
+	margin: 10px;
+	border-radius: 0.5rem;
+	box-shadow: 0 0.1rem 0.5rem var(--color-light);
 }
 
 .menu-lang {

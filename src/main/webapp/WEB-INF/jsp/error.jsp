@@ -17,6 +17,9 @@
 
         <div class="add-table-margin">
             <c:out value="${error}" />
+            <c:out value="${requestScope.errorMessage}" />
+            <c:out value="${requestScope.error}" />
+            <c:out value="${requestScope.values()}" />
         </div>
     </body>
 </html>

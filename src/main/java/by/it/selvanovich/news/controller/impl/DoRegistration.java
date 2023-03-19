@@ -12,7 +12,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class DoRegistration implements Command {
-    // TODO добавить валидаторы
 
     private final IUserService service = ServiceProvider.getInstance().getUserService();
 
@@ -30,9 +29,16 @@ public class DoRegistration implements Command {
         String surname = request.getParameter(JSP_SURNAME_PARAM);
 
         try {
-            service.registration(new User(username, password, name, surname, "user"));
-            response.sendRedirect("controller?command=go_to_base_page");
+            if (service.registration(new User(username, password, name, surname, "user"))) {
+                request.getSession().setAttribute("errorMessage", "message");
+                response.sendRedirect("controller?command=go_to_news_list");
+            } else {
+                request.setAttribute("Error", "local.error.name.reg_error");
+                request.getRequestDispatcher("controller?command=go_to_news_list").forward(request, response);
+                //response.sendRedirect("controller?command=go_to_base_page#registration");
+            }
         } catch (ServiceException e) {
+            request.getSession().setAttribute("errorMessage", "message");
             e.printStackTrace();
             response.sendRedirect("controller?command=go_to_error_page");
         }

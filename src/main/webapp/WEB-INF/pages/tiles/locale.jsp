@@ -5,6 +5,8 @@
 	<fmt:message bundle="${loc}" key="local.message" var="message" />
 	<fmt:message bundle="${loc}" key="local.pagetitle" var="page_title" />
 
+	<fmt:message bundle="${loc}" key="icon.pagelang" var="icon" />
+
 	<fmt:message bundle="${loc}" key="local.error.name.global_error" var="error" />
 
 	<fmt:message bundle="${loc}" key="local.menu.welcome.label" var="welcome_label" />

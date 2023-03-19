@@ -12,7 +12,10 @@ public class GoToErrorPage implements Command {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO доработать вывод ошибок
         String message = (String) request.getSession().getAttribute("errorMessage");
-        request.getSession(true).setAttribute("errorMessage", message);
+        if (message != null) {
+            System.out.println("123" + message);
+            request.getSession(true).setAttribute("error", message + "852");
+        }
         request.setAttribute("presentation", "error");
         request.getRequestDispatcher("WEB-INF/jsp/error.jsp").forward(request, response);
 

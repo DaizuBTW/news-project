@@ -11,16 +11,16 @@
         <c:if test="${not (sessionScope.user eq 'active')}">
 
             <div align="right">
-                <a href="" class="overlayLink" data-action="login-form.jsp"><c:out value="${popup_btn_enter}"/></a>
-                <a href="" class="overlayLink" data-action="registration-form.jsp"><c:out value="${popup_btn_register}"/></a>
-                <c:if test="${not (requestScope.AuthenticationError eq null)}">
+                <a href="#signin" class="overlayLink" ><c:out value="${popup_btn_enter}"/></a>
+                <a href="#registration" class="overlayLink"><c:out value="${popup_btn_register}"/></a>
+                <!--<c:if test="${not (requestScope.AuthenticationError eq null)}">
                     <font color="red">
                         <c:out value="${login_error}" />
                     </font>
                     <script>
                         window.alert("<c:out value="${login_error}" />");
                     </script>
-                </c:if>
+                </c:if>-->
             </div>
 
         </c:if>

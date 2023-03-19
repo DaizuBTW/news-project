@@ -7,12 +7,15 @@ import by.it.selvanovich.news.dao.connectionPool.ConnectionPool;
 import by.it.selvanovich.news.dao.connectionPool.ConnectionPoolException;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class NewsDAO implements INewsDAO {
 
     private static final String ERR_MESSAGE_SQL = "sql error";
     private static final String ERR_MESSAGE_CONNECTION_POOL = "error trying to take connection";
+
+    private static final String DATE_FORMAT = "dd.MM.yyyy\n HH:mm";
 
     private static final String SQL_SHOW_LIST = "SELECT id, title, brief, content, date, category " +
             "FROM news JOIN newscategory n on news.category_id = n.news_category_id ORDER BY date DESC";
@@ -35,12 +38,14 @@ public class NewsDAO implements INewsDAO {
         ResultSet rs = null;
         List<News> listResult = new ArrayList<>();
         try {
+            SimpleDateFormat formater = new SimpleDateFormat(DATE_FORMAT);
             con = connectionPool.takeConnection();
             st = con.createStatement();
             rs = st.executeQuery(SQL_SHOW_LIST);
             while (rs.next()) {
+                String date = formater.format(rs.getTimestamp(5));
                 listResult.add(new News(rs.getInt(1), rs.getString(2), rs.getString(3),
-                        rs.getString(4), rs.getString(5), rs.getString(6)));
+                        rs.getString(4), date, rs.getString(6)));
             }
             return listResult;
         } catch (SQLException e) {
@@ -59,13 +64,15 @@ public class NewsDAO implements INewsDAO {
         ResultSet rs = null;
         List<News> listResult = new ArrayList<>();
         try {
+            SimpleDateFormat formater = new SimpleDateFormat(DATE_FORMAT);
             con = connectionPool.takeConnection();
             ps = con.prepareStatement(SQL_SHOW_LIST_BY_FILTER);
             ps.setInt(1, category);
             rs = ps.executeQuery();
             while (rs.next()) {
+                String date = formater.format(rs.getTimestamp(5));
                 listResult.add(new News(rs.getInt(1), rs.getString(2), rs.getString(3),
-                        rs.getString(4), rs.getString(5), rs.getString(6)));
+                        rs.getString(4), date, rs.getString(6)));
             }
             return listResult;
         } catch (SQLException e) {
@@ -81,12 +88,14 @@ public class NewsDAO implements INewsDAO {
     public List<News> getLatestList(int count) throws NewsDAOException {
         List<News> listResult = new ArrayList<>();
         try (Connection connection = ConnectionPool.getInstance().takeConnection()) {
+            SimpleDateFormat formater = new SimpleDateFormat(DATE_FORMAT);
             PreparedStatement ps = connection.prepareStatement(SQL_SHOW_LAST_NEWS_LIST);
             ps.setInt(1, count);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
+                String date = formater.format(rs.getTimestamp(5));
                 listResult.add(new News(rs.getInt(1), rs.getString(2), rs.getString(3),
-                        rs.getString(4), rs.getString(5), rs.getString(6)));
+                        rs.getString(4), date, rs.getString(6)));
             }
             return listResult;
         } catch (SQLException e) {
@@ -99,12 +108,14 @@ public class NewsDAO implements INewsDAO {
     @Override
     public News fetchById(int id) throws NewsDAOException {
         try (Connection connection = ConnectionPool.getInstance().takeConnection()) {
+            SimpleDateFormat formater = new SimpleDateFormat(DATE_FORMAT);
             PreparedStatement ps = connection.prepareStatement(SQL_SHOW_BY_ID);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             rs.next();
+            String date = formater.format(rs.getTimestamp(5));
             return new News(rs.getInt(1), rs.getString(2), rs.getString(3),
-                    rs.getString(4), rs.getString(5), rs.getString(6));
+                    rs.getString(4), date, rs.getString(6));
         } catch (SQLException e) {
             throw new NewsDAOException(ERR_MESSAGE_SQL, e);
         } catch (ConnectionPoolException e) {
