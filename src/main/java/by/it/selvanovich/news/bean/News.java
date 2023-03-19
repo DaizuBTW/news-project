@@ -1,10 +1,12 @@
 package by.it.selvanovich.news.bean;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
 public class News implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     private Integer id = 0;
@@ -82,7 +84,7 @@ public class News implements Serializable {
     }
 
     public void setNewsDate(String newsDate) {
-        this.date = date;
+        this.date = newsDate;
     }
 
     @Override
