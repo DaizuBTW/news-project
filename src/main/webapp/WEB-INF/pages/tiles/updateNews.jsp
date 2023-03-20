@@ -19,7 +19,7 @@
             </label>
             <label for="date">
                 <p class="label_popup"><c:out value="${news_date}" /></p>
-                <input type="datetime-local" name="date" id="date" value="<c:out value="${requestScope.news.newsDate }" />:00">
+                <input type="datetime-local" name="date" id="date"  required>
             </label>
             <label for="brief">
                 <p class="label_popup"><c:out value="${news_brief}" /></p>

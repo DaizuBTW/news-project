@@ -13,7 +13,6 @@ public class ServletContextListener implements jakarta.servlet.ServletContextLis
             ConnectionPool.getInstance().initPoolData();
             System.out.println("Connection pool init");
         } catch (ConnectionPoolException e) {
-            System.out.println("error");
             throw new RuntimeException("error during init of connection pool", e);
         }
 

@@ -10,43 +10,35 @@
 
 <div class="add-table-margin">
     <form action="controller" method="post">
-        <table class="news_text_format">
-            <tr>
-                <td class="space_around_title_text"><c:out value="${news_title}" /></td>
-
-                <td class="space_around_view_text"><div class="word-breaker">
-                    <textarea name="title" cols="40" rows="2" required placeholder="<c:out value="${news_title}" />"></textarea>
-                </div></td>
-            </tr>
-            <tr>
-                <td class="space_around_title_text"><c:out value="${news_date}" /></td>
-                <td class="space_around_view_text"><div class="word-breaker">
-                    <input type="datetime-local" name="date">
-                </div></td>
-            </tr>
-            <tr>
-                <td class="space_around_title_text"><c:out value="${news_brief}" /></td>
-                <td class="space_around_view_text"><div class="word-breaker">
-                    <textarea name="brief" cols="40" rows="2" required placeholder="<c:out value="${news_brief}" />"></textarea>
-                </div></td>
-            </tr>
-            <tr>
-                <td class="space_around_title_text"><c:out value="${news_content}" /></td>
-                <td class="space_around_view_text"><div class="word-breaker">
-                    <textarea name="content" cols="40" rows="3" required placeholder="<c:out value="${news_content}" />"></textarea>
-                </div></td>
-            </tr>
-            <tr>
-                <td class="space_around_title_text"><c:out value="${category_label}" /></td>
-                <td class="space_around_view_text"><div class="word-breaker">
-                    <select name="category">
-                        <option value="1"><c:out value="${sport}" /></option>
-                        <option value="2"><c:out value="${society}" /></option>
-                        <option value="3"><c:out value="${weather}" /></option>
-                    </select>
-                </div></td>
-            </tr>
-        </table>
+        <div class="news-wrapper">
+            <label for="title">
+                <p class="label_popup"><c:out value="${news_title}"/></p>
+                <textarea name="title" cols="40" rows="3" id="title" required
+                          placeholder="<c:out value="${requestScope.news.title }" />"></textarea>
+            </label>
+            <label for="date">
+                <p class="label_popup"><c:out value="${news_date}" /></p>
+                <input type="datetime-local" name="date" id="date" required>
+            </label>
+            <label for="brief">
+                <p class="label_popup"><c:out value="${news_brief}" /></p>
+                <textarea name="brief" cols="40" rows="5" id="brief" required
+                          placeholder="<c:out value="${requestScope.news.briefNews }" />"></textarea>
+            </label>
+            <label for="content">
+                <p class="label_popup"><c:out value="${news_content}" /></p>
+                <textarea name="content" cols="40" rows="15" id="content" required
+                          placeholder="<c:out value="${requestScope.news.content }" />"></textarea>
+            </label>
+            <label for="category">
+                <p class="label_popup"><c:out value="${category_label}" /></p>
+                <select name="category" id="category">
+                    <option value="1"><c:out value="${sport}" /></option>
+                    <option value="2"><c:out value="${society}" /></option>
+                    <option value="3"><c:out value="${weather}" /></option>
+                </select>
+            </label>
+        </div>
         <c:if test="${not (requestScope.newsError eq null)}">
             <div class="menu-wrapper-error">
                 <p>

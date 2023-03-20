@@ -63,7 +63,7 @@
                         <c:out value="${login_error}" />
                     </font>
                 </c:if>
-                <input type="submit" name="log-in" value="<c:out value="${popup_btn_enter}" />">
+                <input type="submit" name="log-in" value="<c:out value="${popup_btn_register}" />">
             </form>
         </div>
     </div>
