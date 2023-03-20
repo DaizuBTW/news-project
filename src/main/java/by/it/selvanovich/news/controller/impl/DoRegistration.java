@@ -35,7 +35,6 @@ public class DoRegistration implements Command {
             } else {
                 request.setAttribute("error", "local.error.name.reg_error");
                 request.getRequestDispatcher("controller?command=go_to_news_list").forward(request, response);
-                //response.sendRedirect("controller?command=go_to_base_page#registration");
             }
         } catch (ServiceException e) {
             request.getSession().setAttribute("errorMessage", "message");
