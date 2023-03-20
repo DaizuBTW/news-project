@@ -30,7 +30,6 @@ public class DoRegistration implements Command {
 
         try {
             if (service.registration(new User(username, password, name, surname, "user"))) {
-                request.getSession().setAttribute("errorMessage", "message");
                 response.sendRedirect("controller?command=go_to_news_list");
             } else {
                 request.setAttribute("error", "local.error.name.reg_error");
