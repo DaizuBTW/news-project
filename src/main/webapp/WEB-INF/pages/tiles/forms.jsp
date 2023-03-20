@@ -17,7 +17,7 @@
                 </label>
                 <label for="password">
                     <p class="label_popup"><c:out value="${popup_password}"/></p>
-                    <input type="password" name="password" value="admin" id="password"
+                    <input type="password" name="password" value="qwertyuio" id="password"
                            placeholder="<c:out value="${header_password}" />"/>
                 </label>
                 <input type="submit" name="log-in" value="<c:out value="${popup_btn_enter}" />">

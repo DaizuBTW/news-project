@@ -47,6 +47,14 @@
                 </div></td>
             </tr>
         </table>
+        <c:if test="${not (requestScope.newsError eq null)}">
+            <div class="menu-wrapper-error">
+                <p>
+                    <fmt:message bundle="${loc}" key="${requestScope.newsError}" var="error_message"/>
+                    <c:out value="${error_message}"/>
+                </p>
+            </div>
+        </c:if>
         <div class="body-button-position">
             <input type="hidden" name="command" value="do_add_news" />
             <input type="submit" value="<c:out value="${button_add}" />" />

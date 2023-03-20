@@ -17,7 +17,7 @@ html,body {
 }
 
 textarea {
-	max-width: 480px;
+	max-width: 100%;
 	min-height: 22px;
 	min-width: 300px;
 	max-height: 300px;
@@ -75,7 +75,7 @@ textarea {
 	
 	padding-top: 5px;
 	padding-bottom: 5px;
-	padding-right: 5px;
+	padding-right: 10px;
  	padding-left: 10px; 
 	
 	
@@ -303,7 +303,6 @@ select {
  
 /* for view news */
  .news_text_format {
-	margin: 0;
     width: 95%;
     text-align: left;
     word-break: break-all;
@@ -392,7 +391,8 @@ input[type="submit"]:hover {
 }
 
 .add-table-margin {
-	margin-left: 20px;
+	margin-left: 10px;
+	margin-right: 10px;
 	margin-top: 15px;
 	margin-bottom: 20px;
 }
@@ -436,5 +436,69 @@ p.category {
 	font-size: 12pt;
 	font-weight: 200;
 	color: #707070;
+}
+
+.news-wrapper {
+	background: var(--color-white);
+	margin: 10px;
+	border-radius: 0.5rem;
+	box-shadow: 0 0.1rem 0.5rem var(--color-light);
+	padding: 5px 20px;
+}
+
+textarea {
+	width: 100%;
+	border-radius: 0.5rem;
+	border: 1px solid var(--color-grey);
+	transition: all 300ms cubic-bezier(0.39, 0.58, 0.57, 1);
+	resize: none;
+}
+
+textarea:focus-visible {
+	border: 2px solid var(--color-green);
+	border-left: 1px solid var(--color-grey);
+	border-right: 1px solid var(--color-grey);
+	border-top: 1px solid var(--color-grey);
+	border-radius: 0.2rem;
+	outline: 0;
+	background-color: var(--color-light2);
+}
+
+.error-page {
+	background-image: url(../images/MonsterError.svg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position-y: -70%;
+	font-family: 'Roboto Flex', sans-serif;
+	height: 100%;
+	min-width: 500px;
+	min-height: 500px;
+	position: relative;
+	width: 1200px;
+}
+
+.error-wrapper {
+	text-align: center;
+	width: 500px;
+	background-color: rgba(255, 255, 255, 0.8);
+	padding: 20px;
+	border-radius: 0.5rem;
+	box-shadow: 0 0.1rem 0.5rem var(--color-light);
+	position: sticky;
+	top: 25%;
+}
+
+.error-wrapper h1{
+	font-size: 60pt;
+	font-weight: 700;
+}
+.error-wrapper h2{
+	font-size: 30pt;
+	font-weight: 200;
+	line-height: 2rem;
+}
+
+.error-input {
+	font-size: 14pt;
 }
 

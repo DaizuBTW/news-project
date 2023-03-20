@@ -15,7 +15,7 @@ import java.io.IOException;
 
 public class DoAddNews implements Command {
 
-    private final INewsService service = ServiceProvider.getInstance().getNewsService();
+    private final INewsService newsService = ServiceProvider.getInstance().getNewsService();
     private final ISecurityAccess accessValidation = ValidatorProvider.getInstance().getSecurityAccess();
 
 
@@ -38,11 +38,16 @@ public class DoAddNews implements Command {
 
         try {
             if (accessValidation.haveAdminPermissions(session)) {
-                service.addNews(title, brief, content, date, category);
+                if (newsService.addNews(title, brief, content, date, category)) {
+                    response.sendRedirect("controller?command=go_to_news_list");
+                } else {
+                    request.setAttribute("newsError", "local.error.name.news_error");
+                    request.getRequestDispatcher("controller?command=go_to_add_news").forward(request, response);
+                }
             } else {
-                // TODO вывод сообщения с ошибкой
+                request.setAttribute("error", "local.error.name.access_error");
+                request.getRequestDispatcher("controller?command=go_to_news_list").forward(request, response);
             }
-            response.sendRedirect("controller?command=go_to_news_list");
         } catch (ServiceException e) {
             e.printStackTrace();
             response.sendRedirect("controller?command=go_to_error_page");

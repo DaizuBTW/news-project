@@ -30,7 +30,8 @@ public class DoDeleteNews implements Command {
             if (accessValidation.haveAdminPermissions(session)) {
                 newsService.delete(id);
             } else {
-                // TODO вывод сообщения с ошибкой
+                request.setAttribute("error", "local.error.name.access_error");
+                request.getRequestDispatcher("controller?command=go_to_news_list").forward(request, response);
             }
             response.sendRedirect("controller?command=go_to_news_list");
         } catch (ServiceException e) {

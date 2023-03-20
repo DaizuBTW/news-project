@@ -41,11 +41,16 @@ public class DoUpdateNews implements Command {
 
         try {
             if (accessValidation.haveAdminPermissions(session)) {
-                newsService.update(Integer.parseInt(id), title, brief, content, date, category);
+                if (newsService.update(Integer.parseInt(id), title, brief, content, date, category)) {
+                    response.sendRedirect("controller?command=go_to_news_list");
+                } else {
+                    request.setAttribute("newsError", "local.error.name.news_error");
+                    request.getRequestDispatcher("controller?command=go_to_update_news").forward(request, response);
+                }
             } else {
-                // TODO вывод сообщения с ошибкой
+                request.setAttribute("error", "local.error.name.access_error");
+                request.getRequestDispatcher("controller?command=go_to_news_list").forward(request, response);
             }
-            response.sendRedirect("controller?command=go_to_news_list");
         } catch (ServiceException e) {
             e.printStackTrace();
             response.sendRedirect("controller?command=go_to_error_page");

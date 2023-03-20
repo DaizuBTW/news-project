@@ -23,7 +23,8 @@ public class GoToAddNews implements Command {
             request.setAttribute("presentation", "addNews");
             request.getRequestDispatcher("WEB-INF/pages/layouts/baseLayout.jsp").forward(request, response);
         } else {
-            response.sendRedirect("controller?command=go_to_news_list");
+            request.setAttribute("error", "local.error.name.access_error");
+            request.getRequestDispatcher("controller?command=go_to_news_list").forward(request, response);
         }
     }
 }

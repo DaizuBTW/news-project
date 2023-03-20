@@ -6,20 +6,23 @@
 <%@ include file="/WEB-INF/pages/tiles/locale.jsp" %>
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Error</title>
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <title>Error</title>
+    <link rel="stylesheet" type="text/css" href="styles/newsStyle.css">
+</head>
     <body>
-        <div class="body-title">
-            <a href="controller?command=go_to_base_page"><c:out value="${button_back_to_news}"/> >> </a> Error page
-        </div>
-
-        <div class="add-table-margin">
-            <c:out value="${error}" />
-            <c:out value="${requestScope.errorMessage}" />
-            <c:out value="${requestScope.error}" />
-            <c:out value="${requestScope.values()}" />
+        <div class="error-page">
+            <div class="error-wrapper">
+                <h1>Ой...</h1>
+                <h2>Что-то пошло не так, попробуйте позже</h2>
+                <br/>
+                <br/>
+                <form>
+                    <input type="hidden" name="command" value="go_to_news_list"/>
+                    <input type="submit" class="error-input" value="<c:out value="${button_back_to_news}"/>">
+                </form>
+            </div>
         </div>
     </body>
 </html>

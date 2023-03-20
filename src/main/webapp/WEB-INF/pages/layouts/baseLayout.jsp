@@ -48,10 +48,10 @@
                     <a href="controller?command=do_localization&local=en"> <c:out value="${en_button}"/> </a>
                     <a href="controller?command=do_localization&local=ru"> <c:out value="${ru_button}"/> </a>
                 </div>
-                <c:if test="${not (requestScope.Error eq null)}">
+                <c:if test="${not (requestScope.error eq null)}">
                     <div class="menu-wrapper-error">
                         <p>
-                            <fmt:message bundle="${loc}" key="${requestScope.Error}" var="error_message"/>
+                            <fmt:message bundle="${loc}" key="${requestScope.error}" var="error_message"/>
                             <c:out value="${error_message}"/>
                         </p>
                     </div>
