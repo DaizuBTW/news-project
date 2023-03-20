@@ -32,18 +32,19 @@ public class UserDAO implements IUserDAO {
 
     @Override
     public boolean authorization(String username, String password) throws DAOException {
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         String hashed;
-        try {
-            connection = connectionPool.takeConnection();
-            preparedStatement = connection.prepareStatement(SQL_AUTHORIZATION_WITH_USERNAME);
-            preparedStatement.setString(1, username);
-            resultSet = preparedStatement.executeQuery();
 
-            if (resultSet.next()) {
-                hashed = resultSet.getString(VALUE_PASSWORD);
+        try {
+            con = connectionPool.takeConnection();
+            ps = con.prepareStatement(SQL_AUTHORIZATION_WITH_USERNAME);
+            ps.setString(1, username);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                hashed = rs.getString(VALUE_PASSWORD);
 
                 return BCrypt.checkpw(password, hashed);
             }
@@ -52,105 +53,128 @@ public class UserDAO implements IUserDAO {
         } catch (ConnectionPoolException e) {
             throw new DAOException(ERR_MESSAGE_CONNECTION_POOL, e);
         } finally {
-            connectionPool.closeConnection(connection, preparedStatement, resultSet);
+            connectionPool.closeConnection(con, ps, rs);
         }
         return false;
     }
 
     @Override
     public boolean registration(User user) throws DAOException {
+
         String password = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
+        Connection con = null;
+        PreparedStatement ps = null;
         int id;
+
         try {
-            connection = connectionPool.takeConnection();
+            con = connectionPool.takeConnection();
+            con.setAutoCommit(false);
+
             try {
-                preparedStatement = connection.prepareStatement(SQL_ADD_TO_USERS);
-                preparedStatement.setString(1, user.getUsername());
-                preparedStatement.setString(2, password);
-                preparedStatement.executeUpdate();
+                ps = con.prepareStatement(SQL_ADD_TO_USERS);
+                ps.setString(1, user.getUsername());
+                ps.setString(2, password);
+                ps.executeUpdate();
+
             } catch (SQLException e) {
                 throw new DAOException(ERR_MESSAGE_SQL, e);
             }
             try {
-                preparedStatement = connection.prepareStatement(SQL_LAST_USER_ID);
-                ResultSet set = preparedStatement.executeQuery();
+                ps = con.prepareStatement(SQL_LAST_USER_ID);
+                ResultSet set = ps.executeQuery();
+
                 if (set.next()) {
                     id = set.getInt(1);
                 } else {
-                    throw new DAOException("no role with such title found in db");
+                    throw new DAOException(ERR_MESSAGE_SQL);
                 }
-                try {
 
-                    preparedStatement = connection.prepareStatement(SQL_ADD_TO_USERDETAILS);
-                    preparedStatement.setInt(1, id);
-                    preparedStatement.setString(2, user.getName());
-                    preparedStatement.setString(3, user.getSurname());
-                    preparedStatement.executeUpdate();
+                try {
+                    ps = con.prepareStatement(SQL_ADD_TO_USERDETAILS);
+                    ps.setInt(1, id);
+                    ps.setString(2, user.getName());
+                    ps.setString(3, user.getSurname());
+                    ps.executeUpdate();
                 } catch (SQLException e) {
                     throw new DAOException(ERR_MESSAGE_SQL, e);
                 }
+
             } catch (SQLException e) {
                 throw new DAOException(ERR_MESSAGE_SQL, e);
             }
-            System.out.println("nice");
+
+            con.commit();
             return true;
+
         } catch (ConnectionPoolException e) {
             throw new DAOException(ERR_MESSAGE_CONNECTION_POOL, e);
+        } catch (SQLException e) {
+            try {
+                con.rollback();
+            } catch (SQLException ex) {
+                throw new DAOException(ERR_MESSAGE_SQL, e);
+            }
+            throw new DAOException(ERR_MESSAGE_SQL, e);
         } finally {
-            connectionPool.closeConnection(connection, preparedStatement);
+            connectionPool.closeConnection(con, ps);
         }
     }
 
     @Override
     public String getRole(String username) throws DAOException {
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-        String role = VALUE_ROLE_GUEST;
+
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
         try {
-            connection = connectionPool.takeConnection();
-            preparedStatement = connection.prepareStatement(SQL_SHOW_USER_ROLE);
-            preparedStatement.setString(1, username);
-            resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                role = resultSet.getString(VALUE_ROLE_TITLE);
+            con = connectionPool.takeConnection();
+            ps = con.prepareStatement(SQL_SHOW_USER_ROLE);
+            ps.setString(1, username);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return rs.getString(VALUE_ROLE_TITLE);
+            } else {
+                return VALUE_ROLE_GUEST;
             }
-            return role;
+
         } catch (SQLException e) {
             throw new DAOException(ERR_MESSAGE_SQL, e);
         } catch (ConnectionPoolException e) {
             throw new DAOException(ERR_MESSAGE_CONNECTION_POOL, e);
         } finally {
-            connectionPool.closeConnection(connection, preparedStatement, resultSet);
+            connectionPool.closeConnection(con, ps, rs);
         }
 
     }
 
     @Override
     public User getUserDetails(String username) throws DAOException {
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         String name = null;
         String surname = null;
+
         try {
-            connection = connectionPool.takeConnection();
-            preparedStatement = connection.prepareStatement(SQL_SHOW_USER);
-            preparedStatement.setString(1, username);
-            resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                name = resultSet.getString("name");
-                surname = resultSet.getString("surname");
+            con = connectionPool.takeConnection();
+            ps = con.prepareStatement(SQL_SHOW_USER);
+            ps.setString(1, username);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                name = rs.getString("name");
+                surname = rs.getString("surname");
             }
-            return new User(null, null, name, surname, null);
+
+            return new User(name, surname);
         } catch (SQLException e) {
             throw new DAOException(ERR_MESSAGE_SQL, e);
         } catch (ConnectionPoolException e) {
             throw new DAOException(ERR_MESSAGE_CONNECTION_POOL, e);
         } finally {
-            connectionPool.closeConnection(connection, preparedStatement, resultSet);
+            connectionPool.closeConnection(con, ps, rs);
         }
     }
 }
